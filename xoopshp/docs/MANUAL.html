@@ -1,0 +1,722 @@
+<html>
+<head>
+    <title>XoopsHP Users Guide</title>
+    <meta http-equiv="content-type" content="text/html; charset=euc-jp"/>
+    <meta http-equiv="content-language" content="jp"/>
+    <meta name="jp-keywords" content="XOOPS docs"/>
+    <meta name="jp-description" content="XOOPS"/>
+    <style>
+        P, TD, LI, INPUT, BODY, SELECT, TEXTAREA {
+            font-family: Verdana;
+            font-size: 13px;
+            line-height: 1.3
+        }
+
+        .error {
+            color: #CC3333;
+            font-weight: bold;
+        }
+
+        UL {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        OL {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        .indent {
+            margin-left: 40px;
+        }
+
+        FORM {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        H1, H2, H3 {
+            margin: 0px;
+            padding: 20px;
+            text-decoration: overline underline;
+            text-align: center;
+        }
+
+        H4 {
+            margin: 5px;
+            padding: 0px;
+            text-decoration: underline;
+        }
+
+        H5 {
+            margin: 10px;
+            padding: 0px;
+        }
+
+        A:link {
+            text-decoration: none;
+        }
+
+        .additions {
+            color: #008800;
+        }
+
+        .deletions {
+            color: #880000;
+        }
+
+        .header {
+            padding: 10px;
+            padding-top: 0px
+        }
+
+        .page {
+            background-color: #FFFFFF;
+            padding: 10px;
+            border: 1px inset;
+        }
+
+        .footer {
+            background-color: #DDDDDD;
+            padding: 5px 10px;
+            border: 1px inset;
+            border-top: none;
+            border-top: 1px solid #CCCCCC
+        }
+
+        .code {
+            background: #FFFFFF;
+            border: solid #888888 2px;
+            font-family: "Courier New";
+            color: black;
+            font-size: 10pt;
+            width: 100%;
+            height: 400px;
+            overflow: scroll;
+            padding: 3px;
+        }
+
+        .revisioninfo {
+            color: #AAAAAA;
+            padding-bottom: 20px;
+        }
+
+        .copyright {
+            font-size: 11px;
+            color: #AAAAAA;
+            text-align: right;
+        }
+
+        .copyright A {
+            color: #AAAAAA;
+        }
+    </style>
+</head>
+
+<body
+        bgcolor="#F8F8F8" text="#000000">
+
+<! ------------------------------------ English section starts here ------------------------------------- !>
+<div class="page">
+<h2 align='center'><A name="en-top">XoopsHP Users Guide</A></h2>
+<h5 align='right'>For version 1.0 (Aug 5, 2005)</h5>
+<h5 align='center'><A HREF="#jp-top"><img src='../docs/img/flag_japanese.gif' alt='English'>To Japanese</A></h5>
+<hr noshade size="1"/>
+<br/>
+<h4>Contents</h4>
+<br/>
+<ul>
+    <li><A HREF="#en-intro">Introduction</A>
+        <ul>
+            <li>This module helps you to ..
+            <li><A HREF="#en-overview">Module Overview</A>
+            <li>How to install
+            <li>How to upgrade
+            <li><A HREF="#en-support">Support</A>
+            <li><A HREF="#en-quickstart">Quick Start</A>
+        </ul>
+    <li><A HREF="#en-toppage">Top Page</A>
+        <ul>
+            <li>Course List
+            <li>Portolio
+        </ul>
+    <li><A HREF="#en-quizlist">Quiz List</A>
+    <li><A HREF="#en-results">Result View</A>
+    <li><A HREF="#en-takequiz">Taking a quiz</A>
+        <ul>
+            <li>Starting a quiz
+            <li>ID prompt
+            <li>Hint button
+            <li>Checking answers
+            <li>Feedback of the result
+            <li>Navigating among blanks
+        </ul>
+    <li><A HREF="#en-addquiz">Adding quizzes</A>
+        <ul>
+            <li>Preparing quiz file
+            <li>Supported quiz file formats
+            <li>Images, audio, and other recourses
+            <li>Uploading the quiz file
+            <li>Updating the quiz
+        </ul>
+    <li><A HREF="#en-preferences">Preferences</A>
+    <li><A HREF="#en-misc">Misc</A>
+        <ul>
+            <li>How to change the menu title
+            <li>Dead links in the quiz
+            <li>Cookie
+            <li>Security software
+        </ul>
+    <li><A HREF="../docs/TIPS4TEACHERS.html">Tips for teachers</A>
+</ul>
+<br/>
+<hr noshade size="1"/>
+
+<h3><A name="en-intro">Introduction</A></h3>
+
+<h4>This modules helps you to ...</h4>
+<ol>
+    <li><A HREF="#en-addquiz">Manage Hot Potatoes quiz files</A> on the web
+    <li>Let your students <A HREF="#en-takequiz">take the quizzes</A> on the web
+    <li>Keep track of your student <A HREF="#en-portfolio">progress and results</A>
+</ol>
+<p>all within the sophisticated environment XOOPS, so that in combination with other features of XOOPS such as Forum,
+    News, and Download modules, teachers can create their online class portals with little effort and budget. Please
+    read <A HREF="../docs/TIPS4TEACHERS.html">Tips for Teachers</A> for more information.
+<h4><A name="en-overview">Module Overview</A></h4>
+<ul>
+    <li><b>Top</b>
+        <ul>
+            <li><b><A HREF="#en-portfolio">Portfolio</A></b>: List all result records
+            <li><b><A HREF="#en-courselist">Course List</A></b>
+                <ul>
+                    <li><b><A HREF="#en-quizlist">Quiz List</A></b>
+                        <ul>
+                            <li><b>List</b>: Titles, posted timestamps, stats etc
+                            <li><b><A HREF="#en-results">Results</A></b>: Links exist only when there are relevant
+                                records
+                                <ul>
+                                    <li>Simple View
+                                    <li>Detailed View
+                                    <li>Action: Delete buttons are available for admins.
+                                </ul>
+                            <li><b>Action</b>: Edit or delete buttons are available for admins.
+                        </ul>
+                    <li><b>Portfolio</b>: List all the results of the particular course. For admins data for everyone is
+                        displayed, but for users only him or her own data is shown.
+                </ul>
+        </ul>
+    <li><b>Administration Menu</b>
+        <ul>
+            <li><b><A HREF="#en-preferences">Preferences</A></b>: Site admins can set module-wide basic settings here.
+            <li><b>Manage Quizzes</b>: Module admins can manage courses and quizzes here.
+                <ul>
+                    <li>Add Course
+                    <li>Course List
+                    <li><A HREF="#en-addquiz">Add Quiz</A>
+                    <li>Quiz List
+                </ul>
+        </ul>
+</ul>
+
+<h4>How to install</h4>
+
+<p>Please read <a href="INSTALL.txt">INSTALL.txt</a>.</p>
+
+<h4>How to upgrade</h4>
+
+<p>Please read <a href="UPGRADE.txt">UPGRADE.txt</a>.</p>
+
+<h4><A name="en-support">Support</A></h4>
+
+<p>If this manual does not solve the problem, feel free to ask me directly in <A HREF="http://www.awajis.net/xoopshp/"
+                                                                                 target="_new">the support forum</A> of
+    this module (http://www.awajis.net/xoopshp/).</p>
+
+<h4><A name="en-quickstart">Quick Start</A></h4>
+
+<p>
+<ol>
+    <li>First create at least one course in the management section (Administration Menu -> Manage Quizzes).
+    <li>Start <A HREF="#en-addquiz">adding quizzes</A>, with titles, quiz files to upload, and courses they belong to.
+    <li>To update the content of an existing quiz, go to the quiz edit page and upload another quiz file.
+    <li>If you have admin permission to the module, you will see Edit or Delete buttons in the quiz list view.
+</ol>
+<h3><A name="en-toppage">Top Page</A></h3>
+
+<img src="../docs/img/toppage.gif" width=401 height=177 alt="Top Page" align="right">
+<h4><A name="en-courselist">Course List</A></h4>
+
+<p>In the top page of the module, you will see a list of available courses with their brief descriptions, along with the
+    number of quizzes you have already finished and the total number of available quizzes in each course. If you are a
+    module admin, you will see the number of quizzes at least one student has finished in each course instead.</p>
+
+<p>The course titles are linked to the quiz lists, where users can click the title of the quiz and start the quiz.</p>
+
+<img src="../docs/img/portfolio-user.gif" width=406 height=246 alt="User Portfolio" align="right">
+<h4><A name="en-portfolio">Portolio</A></h4>
+
+<p>Unless you are a guest user, you see a link to your portfolio section at the top right of the course list table. For
+    users, all the past records will be listed in the portfolio, and for admin users, all the records of all the users
+    will be displayed. The quiz title is linked to the corresponding quiz so that users can jump directly to the quiz
+    from the list.</p>
+
+<p>You can specify a particular course to display results from, and you can sort the record items by clicking the
+    heading in the table.</p>
+
+<p>Admin users can delete record items in the list by clicking the delete button right next to the items.</p>
+<img src="../docs/img/portfolio-admin.gif" width=297 height=321 alt="Admin Portfolio" align="left"><br clear=all>
+
+<h3><A name="en-quizlist">Quiz List</A></h3>
+
+<p>Quiz ID, title, date and time the quiz was posted, the number of students who finished the quiz, the highest scores
+    of the user and all the users are displayed in the quiz list. If a user has finished a particular quiz at least
+    once, a Result link will be shown in the action column, which will show all the records of the student related to
+    the quiz.</p>
+
+<center><img src="../docs/img/quizlist-user.gif" width=405 height=206 alt="User Quiz List"><br clear=all></center>
+
+<p>The portfolio link in this section will conveniently takes uses to the list of their records of this particular
+    course.</p>
+
+<p>The admin users additionally see Edit and Delete buttons for each quiz, so that they can replace the quiz content or
+    delete the quiz with all its user records. The result button for the admins will display all the records of all the
+    users for the particular quiz.</p>
+
+<center><img src="../docs/img/quizlist-admin.gif" width=405 height=315 alt="Admin Quiz List"><br clear=all></center>
+
+<h3><A name="en-results">Result View</A></h3>
+<img src="../docs/img/results.gif" width=439 height=158 alt="Results View" align="right">
+
+<p>In the result view, there are two display modes: simple view with only basic information, and detailed view with more
+    information such as users' host and IP addresses, etc. Display order can be changed by clicking the header items of
+    the table.</p>
+
+<p>For admin users, a delete button is displayed for each entry in the result list so that they can remove unnecessary
+    entries from the database.</p>
+
+<h3><A name="en-takequiz">Taking a quiz</A></h3>
+<h4>Starting a quiz</h4>
+
+<p>Users can start a quiz by clicking quiz titles in the quiz list or elsewhere such as the header in the result view
+    etc. Guest users, those who haven't logged in to the site, are prompted with an alert that their result will not be
+    recorded in the database nor sent by email.</p>
+
+<h4>ID prompt</h4>
+<img src="../docs/img/id-prompt.gif" width=284 height=111 alt="ID Prompt" align="right">
+
+<p>Users are then prompted to enter their ID (or names, etc depending on the setting when the quiz was created). This is
+    redundant information because the site username is automatically recorded with the results, but teachers can
+    instruct their students to type some other information as necessary. The quiz will not start properly without typing
+    some text at the prompt.</p>
+
+<h4>Hint button</h4>
+<img src="../docs/img/samplequiz.gif" width=273 height=220 alt="Sample Quiz" align="right">
+
+<p>If the quiz was created with the hint feature enabled, a hint button will be displayed. By clicking the button, one
+    letter will be given as a hint in the focused blank in quizzes of the cloze type. Uses of the hint button reduces
+    the final score at the end.</p>
+<h4>Checking answers</h4>
+
+<p>Users can check their answers any time during the attempt. The total score is reduced according to the frequency of
+    answer checking. The perfect answer in the very first check results in a score of 100%. Correct answers will be
+    marked in bold or with some distinct marks, while wrong answers remain for correction. The result of the quiz <b>will
+        not</b> be sent until the user completes the quiz by giving all the right answers.</p>
+
+<h4>Feedback of the result</h4>
+<img src="../docs/img/feedback.gif" width=267 height=173 alt="Feedback" align="right">
+
+<p>A new window will pop open when the quiz is done, and the score of the quiz is displayed in the new window along with
+    other information. At this point, the same information is recorded in the database and is sent by email to the
+    registered addresses of the poster and the taker of the quiz.</p>
+
+<p>At the bottom of the window, there is a Close button to close both the quiz and the result window at once.</p>
+
+<p><font color='red'>[IMPORTANT]</font> Users must allow their WWW browsers to use pop-up windows. Otherwise the results
+    will not be displayed, recorded nor sent properly.</p>
+
+<h4>Navigating among blanks</h4>
+
+<p>When filling in blanks in the cloze type quiz, a tab key will move the position of the cursor to the next blank,
+    while shift+tab will move the focus back to the one before the current one. The exiisting answer will be selected
+    right after the movement with the tab key, the user can either start typing a new answer by replacing the old one,
+    or first unselect the old answer by typing a right cursor key before adding new text.</p>
+
+<h3><A name="en-addquiz">Adding quizzes</A></h3>
+<h4>Preparing quiz files</h4>
+
+<p>Use the latest version of Hot Potatoes and create quiz files. For details, please read the tutorial available at Hot
+    Potatoes homepage (<A HREF="http://web.uvic.ca/hrd/hotpot/tutorials6.htm" target="_new">http://web.uvic.ca/hrd/hotpot/tutorials6.htm</A>).
+</p>
+
+<p>The module tries to alter the source of the quiz file during the upload process so that the CGI option is enabled,
+    regardless of how the quiz was created. However, it heavily relies on subtle matching of the text strings, so it is
+    recommended to have the CGI option turned on when you create the quiz. In that case, you do not need to set anything
+    in the fields of the CGI option.</p>
+
+<h4>Supported format of quiz files</h4>
+
+<p>XoopsHP is compatible with all the quiz types provided by Hot Potatoes ver. 6: JCloze, JCross, JMix, JMatch, JQuiz.
+    The drag and drop types of quizzes are also supported.</p>
+
+<p>Since quiz files created by older versions of Hot Potatoes may have slightly different structures in their source
+    code, this module can not guarrantee the automatic implementation of the feedback CGI functions properly. As far as
+    the author quickly investigated, sometimes the user ID prompt appears more than once, but this does not affect the
+    feedback feature as a whole.</p>
+
+<h4>Images, audio, and other recourses</h4>
+
+<p>In this module, only the text source file can be uploaded and stored in the database. In order to publish quizzes
+    with other multimedia content such as images and audio files, you first need to upload them somewhere on the web.
+    Then, when you incorporate those objects in your quizzes, be sure to refer to them by complete URLs, that is,
+    starting from http://. Likewise, if you want to nclude any links in the quiz, use full URLs.</p>
+
+<img src="../docs/img/addquiz.gif" width=321 height=145 alt="Add Quiz" align="right">
+<h4>Uploading the quiz file</h4>
+
+<p>In the Manage Quizzes section, type the title of the quiz and select the course it belongs to. Then, specify the quiz
+    file to upload from your hard disk. Press the Add Quiz button. If successful, the quiz will be listed in the quiz
+    list section in the admin menu, as well as in the quiz list for users.<br clear=all></p>
+
+<h4>Updating the quiz</h4>
+<img src="../docs/img/admin-editquiz.gif" width=322 height=269 alt="Preferences" align="right">
+
+<p>Go into the edit quiz mode from where the Edit link is available. You can directly edit the title and select a new
+    course, but you cannot edit the content of the quiz source even though it is displayed in the text area for your
+    reference. To replace the quiz content, prepare a new quiz file first, and upload the file to substitute for the
+    existing content.<br clear=all></p>
+
+<h3><A name="en-preferences">Preferences</A></h3>
+<img src="../docs/img/preferences.gif" width=437 height=336 alt="Preferences" align="right">
+
+<p>Preferences can be set by the site admin users. The module admins (users given admin permission for paricular
+    modules) can not change the preference settings.</p>
+
+<p>The first item in the preferences section is the setting of the Hot Potatoes license. If you have a valid license of
+    the software, check Yes in this section. By setting this to Yes, you will be able to publish quizzes that are not
+    open to the public. To look at it another way, if your license setting is No, anonymous users will be able to access
+    your XoopsHP module automatically even if guest access is turned off in the system preference, in order to ensure
+    that unlicensed quizzes are freely available to anyone on the web.</p>
+
+<p>You can also change the title and the brief description in the top page of the module.</p>
+
+<h3><A name="en-misc">Misc</A></h3>
+<img src="../docs/img/admin-modules.gif" width=410 height=289 alt="Module Admin" align="right">
+<h4>How to change the menu title</h4>
+
+<p>Log in as the site administrator(not as the module admin), and go to the administration menu. Open 'Modules' in
+    'System Admin' section. In the list of installed modules, change the title of the module as you wish. The title that
+    appears in the main menu will be changed accordingly.</p>
+
+<h4>Dead links in the quiz</h4>
+
+<p>The module tries to look into the quiz source and make necessary changes. However, the check is not perfect, and
+    there are things it cannot handle properly. One example is the navigation links embedded when the quiz files were
+    originally created, such as the Index button to go back to the index file, or Previous / Next buttons to navigate
+    through the set of quizzes. These will show as dead links when the quiz files are integrated into XOOPS.</p>
+
+<p>To avoid this, the best users can do is to turn off the automatic embedding of the navigation links when they create
+    the quizzes. For details, please consult the Hot Potatoes manual and related documents.</p>
+
+<h4>Cookies</h4>
+
+<p>In XOOPS as well as in this module, cookies are frequently used to pass necessary information over pages. If the
+    browser is not set to accept cookies, a large part of the functions do not operate properly.</p>
+
+<h4>Security software</h4>
+
+<p>Security applications such as Norton or McAfee are reported to cause problems in the XOOPS environment. If you
+    persistently have problems , please check if any firewall or virus software is installed and running on your
+    computer. Try turning it off and see whether the problems continue.</p>
+
+<h3><A HREF="../docs/TIPS4TEACHERS.html">Tips for teachers</A></h3>
+
+<p>In a document titled as "<A HREF="../docs/TIPS4TEACHERS.html">Tips for Teachers</A>", several tips are provided for
+    teachers in using XOOPS and XoopsHP for classes.</p>
+</div>
+
+<! ------------------------------------ Japanese section starts here ------------------------------------- !>
+<div class="page">
+<h2 align='center'><A name="jp-top">XoopsHPユーザガイド</A></h2>
+<h5 align='right'>For version 1.0 (2005年8月5日版　画像はすべて英語版と共通)</h5>
+<h5 align='center'><A HREF="#en-top"><img src='../docs/img/flag_uk.gif' alt='UK'>&nbsp;<img
+        src='../docs/img/flag_us.gif' alt='US'>To English</A></h5>
+<hr noshade size="1"/>
+<br/>
+<h4>Contents</h4>
+<br/>
+<ul>
+    <li><A HREF="#jp-intro">はじめに</A>
+        <ul>
+            <li>このモジュールできること…
+            <li><A HREF="#jp-overview">モジュール概観</A>
+            <li>インストール方法
+            <li>アップグレード方法
+            <li><A HREF="#jp-support">サポート</A>
+            <li><A HREF="#jp-quickstart">とりあえず使ってみるには</A>
+        </ul>
+    <li><A HREF="#jp-toppage">トップページ</A>
+        <ul>
+            <li>コース一覧
+            <li>学習履歴
+        </ul>
+    <li><A HREF="#jp-quizlist">問題一覧</A>
+    <li><A HREF="#jp-results">結果一覧</A>
+    <li><A HREF="#jp-takequiz">問題の解答方法</A>
+        <ul>
+            <li>問題開始方法
+            <li>ID入力
+            <li>ヒントボタン
+            <li>答え合わせ
+            <li>結果の表示と送信
+            <li>解答欄の移動
+        </ul>
+    <li><A HREF="#jp-addquiz">問題の追加方法</A>
+        <ul>
+            <li>問題ファイルの準備
+            <li>対応する問題ファイル形式
+            <li>画像や音声などの利用
+            <li>問題ファイルのアップロード
+            <li>問題の更新
+        </ul>
+    <li><A HREF="#jp-preferences">一般設定</A>
+    <li><A HREF="#jp-misc">その他</A>
+        <ul>
+            <li>メニュー表記の変更方法
+            <li>問題中のリンク切れ
+            <li>ブラウザのクッキー
+            <li>セキュリティーソフトの利用
+        </ul>
+    <li><A HREF="../docs/TIPS4TEACHERS.html">教師向け利用のコツ</A>
+</ul>
+<br/>
+<hr noshade size="1"/>
+
+<h3><A name="jp-intro">はじめに</A></h3>
+
+<h4>このモジュールできること…</h4>
+<ol>
+    <li>WWW上でHot Potatoesで作成した<A HREF="#jp-addquiz">問題を管理</A>できる
+    <li>学生にWWW上で<A HREF="#jp-takequiz">問題を受験</A>させることができる
+    <li><A HREF="#jp-portfolio">作業状況や問題の記録</A>を把握できる
+</ol>
+<p>これらすべてを、機能豊富なXOOPSという環境の中で行うことができるため、フォーラムやニュース、ダウンロードなど他の各種モジュールの機能と組み合わせて、低予算で簡単に授業用ポータルサイトを構築することができます。<A
+        HREF="../docs/TIPS4TEACHERS.html">教師向け利用のコツ</A>も参考にしてください。
+<h4><A name="jp-overview">モジュール概観</A></h4>
+<ul>
+    <li><b>トップページ</b>
+        <ul>
+            <li><b><A HREF="#jp-portfolio">学習履歴</A></b>：ユーザの全学習記録を表示します。管理者には全ユーザの記録が表示されます。
+            <li><b><A HREF="#jp-courselist">コース一覧</A></b>
+                <ul>
+                    <li><b><A HREF="#jp-quizlist">問題一覧</A></b>
+                        <ul>
+                            <li><b>List</b>：問題名、登録日時、その他データが表示されます。
+                            <li><b><A HREF="#jp-results">結果</A></b>：記録データがある場合、結果一覧へのリンクが表示されます。
+                                <ul>
+                                    <li>簡易表示
+                                    <li>詳細表示
+                                    <li>操作：モジュール管理者には記録削除のボタンが表示されます。
+                                </ul>
+                            <li><b>操作</b>：モジュール管理者には問題の編集と削除のボタンが表示されます。
+                        </ul>
+                    <li><b>学習履歴</b>：当該コースのすべての結果が一覧されます。管理者にはすべてのユーザの結果が表示されますが、一般ユーザには各自の結果のみが表示されます。
+                </ul>
+        </ul>
+    <li><b>モジュール管理メニュー</b>
+        <ul>
+            <li><b><A HREF="#jp-preferences">一般設定</A></b>：サイト管理者のみが、モジュール全体の基本的な諸設定を行うことができます。
+            <li><b>問題管理</b>：モジュール管理者はコースや問題の管理を行うことができます。: Module admins can manage courses and quizzes here.
+                <ul>
+                    <li>コース追加
+                    <li>コース一覧
+                    <li><A HREF="#jp-addquiz">問題追加</A>
+                    <li>問題一覧
+                </ul>
+        </ul>
+</ul>
+
+<h4>インストール方法</h4>
+
+<p><a href="INSTALL.txt">INSTALL.txt</a>をお読みください。</p>
+
+<h4>アップグレード方法</h4>
+
+<p><a href="UPGRADE.txt">UPGRADE.txt</a>をお読みください。</p>
+
+<h4><A name="jp-support">サポート</A></h4>
+
+<p>もしこのガイドでは解決しない問題がありましたら、遠慮なく作者へお問い合わせくださるか、<A HREF="http://www.awajis.net/xoopshp/" target="_new">サポートフォーラム</A>（http://www.awajis.net/xoopshp/）で質問してください。
+</p>
+
+<h4><A name="jp-quickstart">とりあえず使ってみるには</A></h4>
+
+<p>
+<ol>
+    <li>まずは、問題管理画面で最低一つはコースを作成してください。
+    <li>次に、問題名、アップロードする問題ファイル、コース名を選択して、<A HREF="#jp-addquiz">問題を追加</A>してください。
+    <li>追加した問題の内容を更新するには、問題編集画面で別の問題ファイルを指定してアップロードし、上書きしてください。
+    <li>モジュール管理者には、問題一覧に「編集」「削除」ボタンが表示されます。
+</ol>
+</p>
+
+<h3><A name="jp-toppage">トップページ</A></h3>
+
+<img src="../docs/img/toppage.gif" width=401 height=177 alt="Top Page" align="right">
+<h4><A name="jp-courselist">コース一覧</A></h4>
+
+<p>モジュールのトップページでは、コース名と簡単な内容説明、収録問題数、各自が終了した問題数などを含むコース一覧が表示されます。管理者の場合は、少なくとも一名以上が完了した問題数が表示されます。</p>
+
+<p>各コース名は、そのコースの問題一覧へのリンクが張られており、一覧される問題の問題名をクリックすれば、問題を開始できるようになっています。</p>
+
+<img src="../docs/img/portfolio-user.gif" width=406 height=246 alt="User Portfolio" align="right">
+<h4><A name="jp-portfolio">学習履歴</A></h4>
+
+<p>
+    ゲストユーザでなければ、コース名一覧表の右上に「学習履歴」へのリンクが表示されます。ユーザは自分が取り組んだ問題の結果をすべて閲覧できるようになっており、管理者ならばすべてのユーザの学習履歴を閲覧できるようになっています。一覧される問題名は問題へ直接リンクされており、すぐに問題を表示できるようになっています。</p>
+
+<p>学習履歴では、一覧するコース名を指定でき、表の各列先頭のタイトルをクリックすればその項目で並べ替えを行えます。</p>
+
+<p>管理者は、各記録の右に表示されている削除ボタンを押すことによって、その記録を削除することができます。</p>
+<img src="../docs/img/portfolio-admin.gif" width=297 height=321 alt="Admin Portfolio" align="left"><br clear=all>
+
+<h4><A name="jp-quizlist">問題一覧</A></h4>
+
+<p>
+    問題一覧では、問題名、問題ID、登録日時、完了者数、ユーザとサイト全体の最高得点が一覧されます。もしそのユーザが一度でもその問題を完了していれば、操作の欄に「結果」というリンクが表示され、そのユーザのその問題についての全結果を表示することができます。</p>
+
+<center><img src="../docs/img/quizlist-user.gif" width=405 height=206 alt="User Quiz List"><br clear=all></center>
+<p>この画面にある「学習履歴」ボタンは、表示されているコースだけに関する学習履歴を簡単に表示できるようになっています。</p>
+
+<p>
+    管理者には、各問題に対して「編集」と「削除」というボタンも表示されます。これにより、問題の内容を差し替えたり、問題自体とそのすべての結果を削除できるようになっています。「結果」ボタンは、管理者に対してはその問題に対するすべてのユーザのすべての記録を表示します。</p>
+
+<center><img src="../docs/img/quizlist-admin.gif" width=405 height=315 alt="Admin Quiz List"><br clear=all></center>
+
+<h4><A name="jp-results">結果一覧</A></h4>
+<img src="../docs/img/results.gif" width=439 height=158 alt="Results View" align="right">
+
+<p>結果一覧には、基本的な内容のみの簡易表示と、ユーザのホスト名やIPアドレスなどを含む詳細表示という二つの表示モードがあります。一覧の順序は、表の各列先頭のタイトルをクリックして切り替えられます。</p>
+
+<p>管理者の場合、不要な記録をデータベースから削除できるように、各項目に「削除」ボタンが用意されています。</p>
+
+<h3><A name="jp-takequiz">問題の解答方法Taking a quiz</A></h3>
+<h4>問題を開始する</h4>
+
+<p>
+    ユーザは、問題一覧や結果一覧などから、問題名をクリックすることによって問題を開始することができます。ログインをしていないユーザ（ゲスト）の場合は、問題開始前に解答結果は記録もメール送信もされないという確認のダイヤログが表示されます。</p>
+
+<h4>ID入力</h4>
+<img src="../docs/img/id-prompt.gif" width=284 height=111 alt="ID Prompt" align="right">
+
+<p>
+    次に、ユーザにはID（あるいは問題を作成したときの設定により氏名などと表示される場合もある）を入力するプロンプトが表示されます。実際にはサイトでのユーザ名は自動で記録されていますから、これは余分な情報ともいえますが、場合によっては必要に応じて学生番号などを入力させるのに使うことができます。このプロンプトで何も入力しないと問題を開始することができません。</p>
+
+<h4>ヒントボタン</h4>
+<img src="../docs/img/samplequiz.gif" width=273 height=220 alt="Sample Quiz" align="right">
+
+<p>問題ファイル作成時にヒント機能がオンになっていると、ヒントボタンが表示されます。このボタンをクリックすると、穴埋め問題の場合は次の一文字を与えてくれます。ヒントボタンを利用すると、総合得点から減点されます。</p>
+
+<h4>答え合わせ</h4>
+
+<p>
+    解答中、ユーザはいつでも答え合わせをすることができますが、答え合わせの回数が多ければその分減点の対象となります。つまり、最初の答え合わせで全問正解すると、100％というスコアが出るようになっています。答え合わせの結果、合っている部分は太字で表示されるなど明示され、間違っている部分は訂正できるよう改めて解答欄として表示されます。問題の記録は、<b>すべて正答するまでは送信されません</b>。
+</p>
+
+<h4>結果の表示と送信</h4>
+<img src="../docs/img/feedback.gif" width=267 height=173 alt="Feedback" align="right">
+
+<p>問題が終了すると、新たにウィンドウが開き、そこにスコアなどの情報が表示されます。このとき、ゲスト以外であれば、同じ情報がデータベースに記録されるとともに、ユーザ本人と問題作成者にメールで送信されます。</p>
+
+<p>そのウィンドウのいちばん下には、結果のウィンドウと問題のウィンドウを同時に閉じるための「閉じる」ボタンが用意してあります。</p>
+
+<p><font color='red'>【重要】</font>WWWブラウザで、ポップアップウィンドウを開くことができるように設定しておいてください。そうしておかないと、結果が表示されないばかりか、記録も送信も正常に行えなくなってしまいます。
+</p>
+
+<h4>解答欄の移動</h4>
+
+<p>
+    穴埋めタイプの問題などで解答欄を移動する際、マウスを使わなくても、キーボードのtabキーで次の解答欄にカーソルを移動することができます。同様に、シフトキーを押しながらtabキーを押せば、一つ前の解答欄に戻ることができます。この際、既に入力されている文字があればそれはすべて選択状態になっていますので、そのまま何か入力すれば前の答えに置き換わります。代わりに、まずカーソル移動の右矢印キーを押してからタイプすれば、既存の解答に付け加えることができます。</p>
+
+<h3><A name="jp-addquiz">問題の追加方法</A></h3>
+<h4>問題ファイルの準備</h4>
+
+<p>Hot Potatoesの最新版を使って問題ファイルを作成してください。詳しくは、Hot Potatoesのホームページで公開されている資料（<A
+        HREF="http://web.uvic.ca/hrd/hotpot/tutorials6.htm"
+        target="_new">http://web.uvic.ca/hrd/hotpot/tutorials6.htm</A>）を参考にしてください。</p>
+
+<p>
+    問題作成時に結果報告用のCGIオプションがオンになっていなくても、このモジュールで問題ファイルがアップロードされる際、CGIでの送信がされるように修正をするようになっています。しかし、この修正は微妙な文字列検索に基づいており完璧とはいえませんので、問題作成時にCGIオプションをオンにしておくことをお薦めします。この際、CGIの各種設定は何もしなくても結構です。</p>
+
+<h4>対応する問題ファイル形式</h4>
+
+<p>XoopsHPは、Hot Potatoes ver. 6が用意しているすべての問題形式に対応しています（JCloze, JCross, JMix, JMatch, JQuiz）。ドラッグドロップタイプの問題にも対応しています。</p>
+
+<p>古いバージョンのHot
+    Potatoesで作成された問題ファイルは生成されるソースコードの構成が若干異なるため、このモジュールが試みるCGIオプションのに関する自動修正は動作保証できません。作者が調べてみた範囲では、問題開始時のID入力要求が二度繰り返されるという現象が確認できていますが、結果の表示や送信には影響は出ませんでした。</p>
+
+<h4>画像や音声などの利用</h4>
+
+<p>
+    このモジュールでは、アップロードされる問題ファイルからテキスト形式で書かれたソース部分のみを抽出してデータベースに保存するようになっています。画像や音声データを含む問題を作成するには、まずはそれらのデータをWWW上のどこかに準備しておく必要があります。そして、問題作成時にそれらのデータを取り込むには、http://で始まる完全なURLによって参照するようにしてください。同様に、問題にリンクを埋め込む場合にも完全なURLを用いてください。</p>
+
+<img src="../docs/img/addquiz.gif" width=321 height=145 alt="Add Quiz" align="right">
+<h4>問題ファイルのアップロード</h4>
+
+<p>
+    問題管理画面で、まずは問題名を記入し、コース名を選択してから、アップロードする問題ファイルを、ご自分のコンピュータのハードディスクに保存してある問題ファイルから選び指定してください。その後、「問題を追加」ボタンを押してください。成功すれば、追加した問題が問題管理画面の一覧や、ユーザ向けの問題一覧に表示されているはずです。<br
+        clear=all></p>
+
+<h4>問題の更新</h4>
+<img src="../docs/img/admin-editquiz.gif" width=322 height=269 alt="Preferences" align="right">
+
+<p>
+    問題の「編集」リンクがあるところから問題の編集モードに入ってください。問題名とコースは直接編集あるいは選択し直すことができますが、問題な異様は確認のために表示はされていても、書き込みはできないようになっています。問題内容を置き換えるには、別の問題ファイルを指定してアップロードし直してください。<br
+        clear=all></p>
+
+<h3><A name="jp-preferences">一般設定</A></h3>
+<img src="../docs/img/preferences.gif" width=437 height=336 alt="Preferences" align="right">
+
+<p>一般設定を行えるのは、サイト管理者のみです。モジュール管理者（モジュールについてのみ管理権限を与えられたグループに属するユーザ）は一般設定の変更はできません。</p>
+
+<p>一般設定の最初の項目は、Hot Potatoesのライセンスの有無です。もしHot
+    Potatoesを利用する正当なライセンスを持っている場合は、ここを「はい」に設定してください。それにより、問題をすべてのユーザに公開しないことも許可されるようになります。言い換えれば、Hot
+    Potatoesの利用条件に抵触しないよう、ライセンス設定が「いいえ」の場合は、システムの設定でXoopsHPモジュールに対するゲストグループのアクセスをオフにしたとしても、自動的にゲストグループはXoopsHPで扱う問題を閲覧できるようになります。</p>
+
+<p>その他、モジュールのトップページのタイトルや説明を変更できるようになっています。</p>
+
+<h3><A name="jp-misc">その他</A></h3>
+<img src="../docs/img/admin-modules.gif" width=410 height=289 alt="Module Admin" align="right">
+<h4>メニュー名を変更する</h4>
+
+<p>
+    サイト管理者でログインし（モジュール管理者ではできません）、「管理者メニュー」に行きます。そして、「システム管理」メニューから「モジュール管理」を選択すると、インストールされたモジュールの一覧が表示されます。このリストで、タイトルを好みに変更してください。このタイトルはメインメニューに表示されます。</p>
+
+<h4>問題中のリンク切れ</h4>
+
+<p>
+    モジュールはアップロードされる問題ファイルのソースを走査し、必要な修正を加えるようになっていますが、それも完全ではありませんので、修正できない部分もあります。その一例が、「目次へ」や「次の問題へ」というボタンなど、問題作成時に埋め込まれた案内のためのリンクです。これらはXOOPS上で表示したときにはリンクが切れてしまいます。</p>
+
+<p>これを避けるための最良の策は、問題作成時にこのようなリンクを自動で埋め込む設定を切ることです。詳しくはHot Potatoesのマニュアルや関連資料を参照してください。</p>
+
+<h4>ブラウザのクッキー</h4>
+
+<p>このモジュールだけでなく、XOOPSでは全般的にページをまたいで情報を受け渡しするためにクッキー情報を活用します。ブラウザがクッキーを受け入れないようになっていると、機能の大部分は正常に動作しなくなってしまいます。</p>
+
+<h4>セキュリティーソフト</h4>
+
+<p>
+    NortonやMcAfeeなどのセキュリティーソフトを使用していると、XOOPS利用時に問題が発生することは既知の問題です。不具合が直らないような場合には、ファイヤーウォールやウィルス対策ソフトがインストールされて動作していないか確認してみてください。それらの機能を一時的に切っても問題が引き続き発生するかどうか確かめてみてください。</p>
+
+<h3><A HREF="../docs/TIPS4TEACHERS.html">教師向け利用のコツ</A></h3>
+
+<p>「<A HREF="../docs/TIPS4TEACHERS.html">教師向け利用のコツ</A>」という文書には、教師が授業でXOOPSやXoopsHPを利用するためのコツが書かれています。</p>
+</div>
+
+</body>
+</html>

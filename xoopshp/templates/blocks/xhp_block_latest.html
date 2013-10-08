@@ -1,0 +1,6 @@
+<ul>
+    <{foreach item=items from=$block.items}>
+    <li><a href="<{$items.ref}>" target="quiz_window" <{$items.alert}>><b><{$items.title}></b></a> (<{$items.posted}>)
+    </li>
+    <{/foreach}>
+</ul>
