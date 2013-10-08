@@ -1,0 +1,6 @@
+<u><i><{$block.secname}></i></u><br>
+<ul>
+    <{foreach item=items from=$block.items}>
+    <li><a href="<{$xoops_url}>/userinfo.php?uid=<{$items.uid}>"><b><{$items.uname}></b></a> (<{$items.average}>%)</li>
+    <{/foreach}>
+</ul>

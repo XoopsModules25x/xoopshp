@@ -1,0 +1,340 @@
+<html>
+<head>
+    <title>XoopsHP Users Guide</title>
+    <meta name="keywords" content="XOOPS docs"/>
+    <meta name="description" content="XOOPS"/>
+    <style>
+        P, TD, LI, INPUT, BODY, SELECT, TEXTAREA {
+            font-family: Verdana;
+            font-size: 13px;
+            line-height: 1.3
+        }
+
+        .error {
+            color: #CC3333;
+            font-weight: bold;
+        }
+
+        UL {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        OL {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        .indent {
+            margin-left: 40px;
+        }
+
+        FORM {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        H1, H2, H3 {
+            margin: 0px;
+            padding: 20px;
+            text-decoration: overline underline;
+            text-align: center;
+        }
+
+        H4 {
+            margin: 5px;
+            padding: 0px;
+            text-decoration: underline;
+        }
+
+        H5 {
+            margin: 10px;
+            padding: 0px;
+        }
+
+        .additions {
+            color: #008800;
+        }
+
+        .deletions {
+            color: #880000;
+        }
+
+        .header {
+            padding: 10px;
+            padding-top: 0px
+        }
+
+        .page {
+            background-color: #FFFFFF;
+            padding: 10px;
+            border: 1px inset;
+        }
+
+        .footer {
+            background-color: #DDDDDD;
+            padding: 5px 10px;
+            border: 1px inset;
+            border-top: none;
+            border-top: 1px solid #CCCCCC
+        }
+
+        .code {
+            background: #FFFFFF;
+            border: solid #888888 2px;
+            font-family: "Courier New";
+            color: black;
+            font-size: 10pt;
+            width: 100%;
+            height: 400px;
+            overflow: scroll;
+            padding: 3px;
+        }
+
+        .revisioninfo {
+            color: #AAAAAA;
+            padding-bottom: 20px;
+        }
+
+        .copyright {
+            font-size: 11px;
+            color: #AAAAAA;
+            text-align: right;
+        }
+
+        .copyright A {
+            color: #AAAAAA;
+        }
+    </style>
+</head>
+
+<body
+        bgcolor="#F8F8F8" text="#000000">
+
+<! ------------------------------------ English section starts here ------------------------------------- !>
+<div class="page">
+    <h2 align='center'><A name="en-top">Tips for Teachers</A></h2>
+    <h5 align='center'><A HREF="#jp-top"><img src='../doc/img/flag_japanese.gif' alt='English'>To Japanese</A></h5>
+    <hr noshade size="1"/>
+    <h4>Contents</h4>
+    <br/>
+    <ul>
+        <li>Tips for using XOOPS for classes
+            <ul>
+                <li><A HREF="#register">Registration without email</A>
+                <li><A HREF="#username">Username and real names</A>
+                <li><A HREF="#official">Official modules</A>
+            </ul>
+            <br/>
+        <li>XoopsHP-specific Tips
+            <ul>
+                <li><A HREF="#restricting">Restricting access</A>
+                <li><A HREF="#feedback">Feedback addresses</A>
+                <li><A HREF="#cheating">On cheating</A>
+            </ul>
+    </ul>
+    <hr noshade size="1"/>
+    <br/>
+    <br/>
+
+    <h3>Tips for using XOOPS for classes</h3>
+    <blockquote>Here are some of the tips I gathered from my own experience in using XOOPS as a class portal.
+    </blockquote>
+    <h4><A name="register">Registration without email</A></h4>
+
+    <p>There is no problem if all the students have their own email addresses and have access to their mail boxes from
+        the lab. Quite often, however, the case is that some students do not have any email address, or that they cannot
+        access their outside mailboxes from the lab. Some students only have cellphone addresses, which cannot handle
+        the URL commands sent from XOOPS upon registration. One solution to this is to use one of the web mail services,
+        but again, this is often prohibited with concerns for its mischivous uses.</p>
+
+    <p>Under such circumstances, a reasonable workaround is to use the personal message system within XOOPS. Users will
+        have to give up on some of the handy email services such as notification, password recovery, etc, but it is good
+        enough as long as students mostly work in the school lab.</p>
+
+    <p>New users usually register themselves by filling out the form and submitting the request, to which they receive
+        an activation key (URL) to activate their user account. But here is how to do the registration without access to
+        email:
+    <ol>
+        <li>Have your students follow the ordinary registration process.
+        <li>Let them tell you their user name when they have completed the process.<br> (You hear them in the lab or
+            they can walk up to you, right?)
+            <br><br>At this point, the student cannot log in yet because the new account has not been activated.<br><br>
+        <li>Log in as the site administrator, and go to the Edit Users section from the System Admin menu.
+        <li>Choose the username from the pull-down menu, and click the Go! button with Modify User option.
+        <li>You will see an alert that the user account has not bee activated yet and will be asked to activate it now.
+            Click Submit button.
+        <li>The new account is ready for login. The student can log in with the username and the password of his/her
+            choice at the registration.
+    </ol>
+    <br>
+    Alternatively, although this is a slightly less secure option to take, you can go to the User Info Settings section
+    from the Preferences of the System Admin menu, and set "Select activation type of newly registered users" to
+    "Activate Automatically." This way, you can skip some of the steps concerning the activation of a new user.</p>
+
+    <h4><A name="username">Username and real names</A></h4>
+
+    <p>XOOPS user profile include a username and a real name. By default, real names are not displayed. One use of the
+        real name field is to use it for the student ID. (You can change its title to something else by editing the
+        template. In XOOPS English vesion 2.2 it is much easier to change the user information fields.) Or, you can
+        instruct your students to use their student IDs for the XOOPS username and enter their real names in the real
+        name field in the Edit Account in the User Menu.</p>
+
+    <h4><A name="#official">Official modules</A></h4>
+
+    <p>Many of the official modules can serve as useful tools in e-Learning contexts. Forums, for example, can be used
+        as ordinary bulletin boards to discuss something, but they can also be used to take rosters of the students by
+        having them post something in a particular thread. The usernames are automatically recorded along with
+        timestamps.</p>
+
+    <p>Also, the Polls module can be used for quick surveys, and the News module is a very convenient tool to make
+        announcements about the classes. With the Links module, teachers can provide related information about some
+        topics from classes, and class materials and documents can be organized with the Download module.</p>
+
+    <h3>XoopsHP-specific Tips</h3>
+    <blockquote>The following are tips for using XoopsHP cleverly.</blockquote>
+
+    <h4><A name="restricting">Restricting access</A></h4>
+
+    <p>Provided that you have a valid license to publish your quiz for a limited group of users on the web, here is how
+        to restrict access to the quizzes to a particular user group.
+    <ol>
+        <li>Log in as the site admin, and go to Groups section from System Admin menu.
+        <li>Create a new group and grant module access right to XoopsHP to that group.<br>N.B. It is NOT module admin
+            right.)
+        <li>Remove the module permission from Registered and Anonymous Users groups.
+        <li>Add your students to the new group.
+    </ol>
+    <br>
+    This way, only the members of the new group have access to your XoopsHP module. Again, please make sure you have a
+    valid license to do so.</p>
+
+    <h4><A name="feedback">Feedback addresses</A></h4>
+
+    <p>The feedback address is set to the registered email address of the poster of the quiz. If you want to use more
+        than one address to suit your need, you might want to create multiple account with different email addresses.
+        Use different login name when you add different quizzes. This way, you can receive the resulting feedback at
+        different email accounts.</p>
+
+    <h4><A name="cheating">On cheating</A></h4>
+
+    <p>The very advantage of Hot Potatoes quiz files can be a disadvantage. Hot Potatoes quiz files are so portable and
+        independent that they can be distributed in removable media such as CDR or DVD-R, however this might give way to
+        cheating because in theory, users can peek into the source file for answer clues. This is not a big problem. You
+        will see it is not as easy as it sounds to find answers in the source because they are not stored as plain text
+        strings.</p>
+
+    <p>XOOPS user authentication is not perfect, either. It guarantees that the person who is trying to log in does have
+        the right password, but it does not not ensure that the person is the valid owner of that user account. There is
+        no telling if a clever friend of someone is logging in to help his or her friend, though this is nothing to
+        worry about if you work in the same lab.</p>
+
+    <p>XoopsHP does its best to prevent cheating with the use of browser's back buttons. Users cannot go back and
+        correct wrong answers and then check the answers again to raise their scores. Of course they can always try the
+        same quiz from the start without cheating.</p>
+
+</div>
+
+<! ------------------------------------ Japanese section starts here ------------------------------------- !>
+<div class="page">
+    <h2 align='center'><A name="jp-top">���ո������ѤΥ���</A></h2>
+    <h5 align='center'><A HREF="#en-top"><img src='../doc/img/flag_uk.gif' alt='UK'>&nbsp;<img
+            src='../doc/img/flag_us.gif' alt='US'>To English</A></h5>
+    <hr noshade size="1"/>
+    <h4>Contents</h4>
+    <br/>
+    <ul>
+        <li>XOOPS���Ȥ����Ѥ��뤿��Υ���
+            <ul>
+                <li><A HREF="#register">�᡼��ʤ��ǥ桼����Ͽ</A>
+                <li><A HREF="#username">�桼��̾����̾</A>
+                <li><A HREF="#official">��⥸�塼��</A>
+            </ul>
+            <br/>
+        <li>XoopsHP�˴ؤ��륳��
+            <ul>
+                <li><A HREF="#restricting">�������������¤���</A>
+                <li><A HREF="#feedback">��������Υ��ɥ쥹�Ȥ�ʬ��</A>
+                <li><A HREF="#cheating">�����԰٤ˤĤ���</A>
+            </ul>
+    </ul>
+    <hr noshade size="1"/>
+    <br/>
+    <br/>
+
+    <h3>XOOPS���Ȥ����Ѥ��뤿��Υ���</h3>
+    <blockquote>XOOPS���ȥ����ȤȤ��ƻȤ��ݤΥ��Ĥ򡢼�ʬ�ηи����餤���Ĥ�����Ƥߤޤ�����</blockquote>
+    <h4><A name="register">�᡼��ʤ��ǥ桼����Ͽ</A></h4>
+
+    <p>
+        �����������줾��᡼�륢�ɥ쥹���äƤ��ơ�����ԥ塼���롼�फ��᡼��ܥå����˥��������Ǥ���Фޤä�������ʤ��ΤǤ������ºݤˤϡ��᡼�륢�ɥ쥹���äƤ��ʤ������������ꡢ����ԥ塼��������ϳ����Υ᡼�륵���Фإ������������¤���Ƥ����ꤹ�뤳�Ȥ�¿�����ޤ��������äΥ᡼�뤷���Ȥ��ʤ������⤤�ơ����ξ��ˤϥ桼����Ͽ�κݤ�XOOPS���������Ƥ��륳�ޥ�ɤ�ޤ��URL������Ǥ��ޤ���Web�᡼�뤬�Ȥ���Ф����ΤǤ���������ޤ����Ѥ����Τ򶲤�ơ����Ѥ��ػߤ���Ƥ�����⤢��褦�Ǥ���</p>
+
+    <p>
+        ���Τ褦�ʾ����Ǥϡ��б����Ȥ��Ƥ�XOOPS��¢�Υ�å����������ƥ��Ȥ��Τ�������������Ȼפ��ޤ�������ˡ��桼���Ϲ������Τ�ѥ����˺��ؤ��б��ʤɡ��᡼��ǹԤ�������ʵ�ǽ���Ȥ��ʤ��ʤ�ޤ���������Υ���ԥ塼�����Ǽ�Ȥ򤹤�¤ꡢ����⤵�ۤ�����ˤʤ�ޤ���</p>
+
+    <p>
+        �����˥桼����Ͽ����ˤϡ��������߽񼰤�ɬ�׻������������������褦�ˤʤäƤ��ޤ�����������ȡ������������ɥ쥹���˿����桼��̾�����ѳ��Ϥ��뤿��Υ������ޤޤ줿URL����������Ƥ��ޤ�������򥯥�å�����п������桼��̾���Ȥ���褦�ˤʤ�Ȥ����櫓�Ǥ������������᡼�뤬�Ȥ��ʤ����˥桼����Ͽ����ˤϰʲ��Τ褦�ˤ��뤷������ޤ���
+    <ol>
+        <li>�������̾��̤�Τ����ǥ桼����Ͽ�ο������ߤ򤵤��ޤ���
+        <li>�������ߤ���λ�����顢���̤˼�ʬ�Υ桼��̾����𤵤��ޤ���<br>��Ʊ����������ʤ�����ʹ������Ǥ��礦��������ޤ��褵���뤳�Ȥ�Ǥ��ޤ���͡���
+            <br><br>���λ����Ǥϡ��������桼��̾�����ѳ��Ͻ����Ƥ��ʤ��Τǡ������Ϥޤ��?����Ǥ��ޤ���<br><br>
+        <li>�����ȴ���ԤȤ��ƥ?���󤷡��֥����ƥ����ץ�˥塼�Ρ֥桼������פ˿ʤߤޤ���
+        <li>����������𤵤줿�桼��̾��ץ�������˥塼�������򤷡��֥桼�����Խ��ץ⡼�ɤˤʤäƤ��뤳�Ȥ��ǧ���Ƥ���������ץܥ���򥯥�å����ޤ���
+        <li>
+            �桼���Υ�������ȤϤޤ����ѳ��Ͻ����Ƥ��ʤ��Τǡ������������ƥ��֤ˤ��뤫������ޤ��������ǡ������ץܥ���򥯥�å�����С����ѳ��Ͻ���Ԥ��ޤ���
+        <li>�������桼��̾�ǥ?���󤹤�������Ǥ��ޤ����������ˡ���Ͽ���˿���������ʬ�Υ桼��̾�ȥѥ���ɤǥ?���󤵤��Ƥ���������
+    </ol>
+    <br>
+    ����ˡ��㴳�������ƥ�����ϴŤ��ʤ�ޤ����������ƥ����ΰ����������ˤ���֥桼����������פǡ��ֿ�����Ͽ�桼����������Ȥ�ͭ�����ˡ�פȤ��������ּ�ưŪ�˥�������Ȥ�ͭ��ˤ���פ��ѹ�������ˡ������ޤ�������ˤ�äơ���κ�ȤΤ������ѳ��Ͻ���˴ؤ�����ʬ��ɬ�פʤ��ʤ�ޤ���</p>
+
+    <h4><A name="username">�桼��̾����̾</A></h4>
+
+    <p>
+        XOOPS�Υ桼������ˤϡ��桼��̾����̾�Ȥ����󤬴ޤޤ�Ƥ��ޤ���ɸ������Ǥ���̾��ɽ������ޤ��󡣤�����̾��Τ��ޤ��Ȥ�ƻ�Ȥ��ơ����������ֹ��������˻Ȥ��Ȥ����꤬����ޤ����ʥƥ�ץ졼�Ȥ��Խ����ơ�ɽ���¾��ɽ�����Ѥ��뤳�Ȥ�Ǥ��ޤ����Ѹ���XOOPS��2.2�ǤǤϡ�����˴�ñ�˥桼�����������Խ����뤳�Ȥ��Ǥ��ޤ����˵դˡ������˻ؼ�����XOOPS�Υ桼��̾�˳����ֹ��Ȥ碌���֥���������Խ��ץ�˥塼����Ƽ�����̾��˻�̾����������Ȥ�����ˡ�⤢��ޤ���</p>
+
+    <h4><A name="#official">��⥸�塼��</A></h4>
+
+    <p>
+        ɸ����󶡤���Ƥ����⥸�塼���¿���ϡ�e-Learning�Ǥ�����˳��ѤǤ��ޤ����㤨�С��ե��������̾�Τ褦�˰ո��򴹤ˤ�Ȥ��ޤ����������ν���Υ���åɤ���Ƥ����뤳�Ȥǽз����Ȥ����Ȥ����Ǥ��ޤ�����Ƥˤϥ桼��̾�ȥ����ॹ����פ���ư�ǵ�Ͽ����ޤ���</p>
+
+    <p>
+        ��ɼ�⥸�塼��Ϥ���äȤ����ո���䥢�󥱡��Ȥ˻Ȥ��ޤ������˥塼���⥸�塼��ϼ�Ȥν�Ϣ�������Ǥ�����󥯥⥸�塼���Ȥ��С���Ȥ˴�Ϣ�����󥯾����������󼨤Ǥ��ޤ���������ե���������ۤ���ˤϥ�����?�ɥ⥸�塼�뤬���ѤǤ��ޤ���</p>
+
+    <h3>XoopsHP�����Ѥ˴ؤ��륳��</h3>
+    <blockquote>�ʲ��ϡ�XoopsHP�򸭤����Ѥ��뤿��Υ��ĤǤ���</blockquote>
+
+    <h4><A name="restricting">�������������¤���</A></h4>
+
+    <p>WWW�������������ۿ�����饤���󥹤�����Ȥ�������ǡ�����Υ��롼�פˤΤ�����ؤΥ������������¤�����ˡ��Ҳ𤷤ޤ���
+    <ol>
+        <li>�����ȴ���Ԥǥ?���󤷡������ƥ�����˥塼�Υ��롼�״���ؿʤߤޤ���
+        <li>���������롼�פ�����������Υ��롼�פ�XoopsHP�ؤΥ⥸�塼�륢���������¤�Ϳ���ޤ��ʥ⥸�塼�����¤ǤϤʤ����Ȥ���դ��Ƥ��������ˡ�
+        <li>��Ͽ�桼���ȥ����ȥ��롼�פ��顢XoopsHP�⥸�塼��ؤΥ�������������ޤ���
+        <li>��ʬ�γ����򿷵��˺����������롼�פ��ɲä��ޤ���
+    </ol>
+    <br>
+    ����ǡ���������Ͽ�����桼���ϡ����¤�Ϳ����줿���롼�פ��ɲä��Ƥ�餦�ޤǡ�XoopsHP�˥����������뤳�ȤϤǤ��ʤ��ʤ�ޤ������줰��⡢�����ʥ饤���󥹤����������Ǥ��Τ褦�������ԤäƤ���������</p>
+
+    <h4><A name="feedback">����������ɥ쥹�λȤ�ʬ��</A></h4>
+
+    <p>
+        ��̤���������륢�ɥ쥹�ϡ������������Ƥ����桼������Ͽ���ɥ쥹�����ꤵ��ޤ����⤷����ˤ�ä�ʣ���Υ��ɥ쥹��Ȥ�ʬ���������ϡ�ʣ���Υ桼��̾������������줾���̤Υ᡼�륢�ɥ쥹����Ͽ������ǡ�������ɲä���Ȥ���ɬ�פ˱����ƥ桼��̾��Ȥ�ʬ���Ƥ�����������������С��ۤʤ륢�ɥ쥹�Ƿ�̤������뤳�Ȥ��Ǥ���褦�ˤʤ�ޤ���</p>
+
+    <h4><A name="cheating">�����԰٤ˤĤ���</A></h4>
+
+    <p>Hot Potatoes�Ǻ������줿����ե������Ĺ��ϡ��Ȥ⤹���û��ˤ�ʤ��礬����ޤ���Hot
+        Potatoes������ե�����ϡ��֥饦����������Хե�����ñ�Ȥ�ư��뤿�ᡢCDR��DVD-R����¸�������ۤ��뤳�Ȥ���ǽ�Ǥ������Τ��Ȥϡ��桼�����ե�����Υ�����������������Τ����Ƥ��ޤ��?������Ȥ⤤���ޤ����Ǥ⡢����Ϥ�����������ǤϤ���ޤ��󡣥������������Ƥߤ�Ф狼��ޤ�����������ñ�ˤ����狼��ʤ��褦�ʷ����ǥ���������������Ƥ��뤿�ᡢ����򤹤�Τ⤽�����䤹�����ȤǤϤʤ����Ȥ������狼��ޤ���</p>
+
+    <p>
+        XOOPS�Υ桼��ǧ�ڤⴰ��ǤϤ���ޤ��󡣥����������Ƥ���桼�����������ѥ���ɤ��äƤ���ȸ������Ȥ��ݾڤ��Ƥ���ޤ��������줬�����˥ѥ���ɤ������ʽ�ͭ�Ԥ��ɤ����ޤǤ��ݾڤ��Ƥ���ޤ��󡣤⤷������ȡ�ͧ�ͤΤ�����������äƽФ�Ƭ�Τ褤ͧ�������⤷��ޤ��󡣤Ǥ⡢�����ع��Υ���ԥ塼�����Ǻ�Ȥ���褦�ʾ��ʤ餿����������ǤϤʤ��Ϥ��Ǥ���</p>
+
+    <p>
+        XoopsHP�Ǥ⡢�֥饦���ΥХå��ܥ����Ȥä������԰٤ˤϤǤ���¤��к���֤��Ƥ��ޤ������碌�򤷤Ƥ���Хå��ܥ����Ȥä���ꡢ��������Ϥᤫ�����������������ȤϤǤ��ʤ��褦�ˤʤäƤ��ޤ���������������꽪���Ƥ�����򤷤ä���Ф����ޤ��������ľ���Ȥ������ȤޤǤ������԰٤Ȥ��Ƥϸ��ʤ��Ƥ��ޤ���</p>
+
+</div>
+</body>
+</html>
