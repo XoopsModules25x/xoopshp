@@ -101,7 +101,6 @@ $end_time = date("Y/m/d H:i:s", strtotime($end_time));
 $timestamp = date("Y/m/d H:i:s");
 $comment = "";
 
-
 // Write in the db
 if ($xoopsUser) {
     include 'module_prefix.php';
@@ -227,7 +226,6 @@ $msg .= "</center>\n";
 my_wrapper($msg);
 exit();
 
-
 function multibyte($s)
 {
     // kazuo sudow global app
@@ -295,5 +293,3 @@ function my_wrapper($msg)
     echo $msg;
     echo '</body></html>';
 }
-
-?>

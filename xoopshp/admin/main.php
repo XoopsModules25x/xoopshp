@@ -442,13 +442,13 @@ function cgi_replace($content)
 
     $content = ereg_replace("toLocaleString", "toGMTString", $content);
     $action  = XOOPS_URL . "/modules/" . $xoopsModule->dirname() . "/process_form.php";
+
     return (ereg_replace(
         "var ResultForm = '<html><body><form name=\"Results\" action=\"[^\"]*\"",
         "var ResultForm = '<html><body><form name=\"Results\" action=\"$action\" accept-charset=\"EUC-JP\"",
         $content
     ));
 }
-
 
 // URL GET_VARS OPTION
 $op = '';

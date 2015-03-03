@@ -38,13 +38,11 @@ $pathIcon32      = $module->getInfo('icons32');
 $pathModuleAdmin = $module->getInfo('dirmoduleadmin');
 $pathLanguage    = $path . $pathModuleAdmin;
 
-
 if (!file_exists($fileinc = $pathLanguage . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/' . 'main.php')) {
     $fileinc = $pathLanguage . '/language/english/main.php';
 }
 
 include_once $fileinc;
-
 
 $adminmenu              = array();
 $i                      = 0;

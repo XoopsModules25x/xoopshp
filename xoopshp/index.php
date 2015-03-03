@@ -640,4 +640,3 @@ switch ($op) {
         listsections();
         break;
 }
-?>

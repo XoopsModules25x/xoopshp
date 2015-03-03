@@ -51,6 +51,7 @@ function b_XHP_completed_show($options)
         $items['uid']       = $myrow['uid'];
         $block['items'][]   = $items;
     }
+
     return $block;
 }
 
@@ -74,8 +75,5 @@ function b_XHP_completed_edit($options)
         . "' />&nbsp; " . _MB_XHP_ITEMS_ARTCLS;
     $form .= "<input type='hidden' name='options[]' value='" . $options[3] . "'>";
 
-
     return $form;
 }
-
-?>

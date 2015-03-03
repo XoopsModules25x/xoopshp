@@ -32,4 +32,3 @@ echo "<H2>No need to call this script by hand.  Please simply update the module<
 echo "<H2>���W���[���̃A�b�v�f�[�g�݂̂ŁA�蓮�ł̃A�b�v�f�[�g�͕s�v�ł��B</H2>\n";
 
 xoops_cp_footer();
-?>

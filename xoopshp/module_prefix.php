@@ -28,5 +28,4 @@
 
 $module_prefix = "XHP";
 // same as SQL database name in 'mysql.sql' file.
-
-?>
+;

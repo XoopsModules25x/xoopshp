@@ -46,4 +46,3 @@ define("_MI_XHP_BLATEST", "Latest Tasks");
 define("_MI_XHP_BRANKING", "Grand Average Ranking");
 define("_MI_XHP_BCOMPLETED", "Completed Tasks Ranking");
 define("_MI_XHP_BCOURSERANK", "Course Average Ranking");
-?>
