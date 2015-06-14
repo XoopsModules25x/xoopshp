@@ -29,6 +29,6 @@
 function xoops_module_install_xoopshp(&$module)
 {
     $groupperm_handler =& xoops_gethandler('groupperm', 'xoopshp');
+
     return $groupperm_handler->addRight('module_read', $module->getVar('mid'), XOOPS_GROUP_ANONYMOUS);
 }
-

@@ -118,7 +118,6 @@ define("_MD_LT_LOW", "����");
 define("_MD_LT_AVRG", "ʿ��");
 define("_MD_LT_PORTFOLIO", "�ؽ�����");
 
-
 // kazuo sudow 1.04
 // define("_XD_FB_USERNAME","��̾");
 // define("_XD_FB_USERNAME","�����");
@@ -228,5 +227,3 @@ define("_XD_FB_CODE4STARTUP", "\x09GetUserName();");
 // StrVars for incertion of Timeout function
 define("_XD_FB_CODE4SEND_INSERT", "\x09if \(\(All(Correct|Done) \=\= true\)\|\|\((Finished|TimeOver) \=\= true\)\)\{|\x09\x09TimeOver \= true;(\r\n|\r|\n)\x09\x09Locked \= true;(\r\n|\r|\n)\x09\x09(\r\n|\r|\n)");
 define("_XD_FB_CODE4SEND", "\x09\x09setTimeout('SendResults(' + Score + ')', 50);");
-
-?>

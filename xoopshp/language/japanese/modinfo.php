@@ -47,4 +47,3 @@ define("_MI_XHP_BLATEST", "�Ƕ��ɲä��줿����");
 define("_MI_XHP_BRANKING", "���ʿ������󥭥�");
 define("_MI_XHP_BCOMPLETED", "��λ�������󥭥�");
 define("_MI_XHP_BCOURSERANK", "��������ʿ������󥭥�");
-?>

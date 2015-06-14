@@ -57,6 +57,7 @@ function b_XHP_courseranking_show($options)
     $sql    = "SELECT secid, secname FROM $sec WHERE secid=$options[3] AND display=1 LIMIT 1";
     $result = $xoopsDB->query($sql);
     list($block['secid'], $block['secname']) = $xoopsDB->fetchRow($result);
+
     return $block;
 }
 
@@ -99,5 +100,3 @@ function b_XHP_courseranking_edit($options)
 
     return $form;
 }
-
-?>

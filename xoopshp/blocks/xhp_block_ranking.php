@@ -52,6 +52,7 @@ function b_XHP_ranking_show($options)
         $items['uid']     = $myrow['uid'];
         $block['items'][] = $items;
     }
+
     return $block;
 }
 
@@ -75,8 +76,5 @@ function b_XHP_ranking_edit($options)
         . $options[2] . "' />&nbsp; %";
     $form .= "<input type='hidden' name='options[]' value='" . $options[3] . "'>";
 
-
     return $form;
 }
-
-?>

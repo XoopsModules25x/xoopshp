@@ -7,4 +7,3 @@ define("_MB_XHP_ITEMS_DISP", "Items to list");
 define("_MB_XHP_ITEMS_ARTCLS", "Items");
 define("_MB_XHP_MINIMUM", "Threshold for display");
 define("_MB_XHP_COURSE", "Course to display");
-?>

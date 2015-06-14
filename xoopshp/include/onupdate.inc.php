@@ -76,5 +76,3 @@ if ($ref == '' || strpos($ref, XOOPS_URL . '/modules/system/admin.php') === 0) {
 
 
 }
-
-?>

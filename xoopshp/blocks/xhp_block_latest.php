@@ -60,6 +60,7 @@ function b_XHP_latest_show($options)
         $items['alert']   = $alert;
         $block['items'][] = $items;
     }
+
     return $block;
 }
 
@@ -81,8 +82,5 @@ function b_XHP_latest_edit($options)
         . "' />&nbsp;" . _MB_XHP_ITEMS_ARTCLS . "";
     $form .= "<input type='hidden' name='options[]' value='" . $options[2] . "'>";
 
-
     return $form;
 }
-
-?>
