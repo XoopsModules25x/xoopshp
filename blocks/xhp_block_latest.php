@@ -29,22 +29,26 @@
 // $options[1]: num to list //
 // $options[2]: module dirname //
 
+/**
+ * @param $options
+ * @return array
+ */
 function b_XHP_latest_show($options)
 {
     global $xoopsDB, $xoopsUser, $xoopsConfig;
-    $myts      =& MyTextSanitizer::getInstance();
+    $myts      = MyTextSanitizer::getInstance();
     $block     = array();
     $mydirname = $options[2];
     $mymodpath = "modules/$mydirname";
     include "$mymodpath/module_prefix.php";
-    if (file_exists("$mymodpath/language/" . $xoopsConfig['language'] . "/main.php")) {
-        include "$mymodpath/language/" . $xoopsConfig['language'] . "/main.php";
+    if (file_exists("$mymodpath/language/" . $xoopsConfig['language'] . '/main.php')) {
+        include "$mymodpath/language/" . $xoopsConfig['language'] . '/main.php';
     } else {
         include "$mymodpath/language/english/main.php";
     }
-    $mytablename = $xoopsDB->prefix($module_prefix . "_quiz");
+    $mytablename = $xoopsDB->prefix($module_prefix . '_quiz');
     if ($xoopsUser) {
-        $alert = "";
+        $alert = '';
     } else {
         $alert = " onClick='alert(\"" . _MD_ALERTGUEST . "\")'";
     }
@@ -53,8 +57,8 @@ function b_XHP_latest_show($options)
     $result = $xoopsDB->query($sql);
     while ($myrow = $xoopsDB->fetchArray($result)) {
         $items            = array();
-        $items['ref']     = $mymodpath . "/index.php?op=viewarticle&amp;artid=" . $myrow['artid'];
-        $items['title']   = $myts->makeTboxData4Show($myrow["title"]);
+        $items['ref']     = $mymodpath . '/index.php?op=viewarticle&amp;artid=' . $myrow['artid'];
+        $items['title']   = $myts->makeTboxData4Show($myrow['title']);
         $items['posted']  = $myrow['posted'];
         $items['counter'] = $myrow['counter'];
         $items['alert']   = $alert;
@@ -64,22 +68,26 @@ function b_XHP_latest_show($options)
     return $block;
 }
 
+/**
+ * @param $options
+ * @return string
+ */
 function b_XHP_latest_edit($options)
 {
     $form = _MB_XHP_ITEMS_ORDER . "&nbsp;<select name='options[]'>";
     $form .= "<option value='DESC'";
-    if ($options[0] == "DESC") {
+    if ($options[0] === 'DESC') {
         $form .= " selected='selected'";
     }
-    $form .= ">" . _MB_XHP_ITEMS_DESC . "</option>\n";
+    $form .= '>' . _MB_XHP_ITEMS_DESC . "</option>\n";
     $form .= "<option value=''";
-    if ($options[0] == "") {
+    if ($options[0] === '') {
         $form .= " selected='selected'";
     }
-    $form .= ">" . _MB_XHP_ITEMS_ASCEND . "</option>\n";
+    $form .= '>' . _MB_XHP_ITEMS_ASCEND . "</option>\n";
     $form .= "</select>\n";
-    $form .= "&nbsp;" . _MB_XHP_ITEMS_DISP . "&nbsp;<input type='text'  size=5 name='options[]' value='" . $options[1]
-        . "' />&nbsp;" . _MB_XHP_ITEMS_ARTCLS . "";
+    $form .= '&nbsp;' . _MB_XHP_ITEMS_DISP . "&nbsp;<input type='text'  size=5 name='options[]' value='" . $options[1]
+             . "' />&nbsp;" . _MB_XHP_ITEMS_ARTCLS . '';
     $form .= "<input type='hidden' name='options[]' value='" . $options[2] . "'>";
 
     return $form;

@@ -26,9 +26,13 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
+/**
+ * @param $module
+ * @return mixed
+ */
 function xoops_module_install_xoopshp(&$module)
 {
-    $groupperm_handler =& xoops_gethandler('groupperm', 'xoopshp');
+    $groupperm_handler = xoops_getHandler('groupperm', 'xoopshp');
 
     return $groupperm_handler->addRight('module_read', $module->getVar('mid'), XOOPS_GROUP_ANONYMOUS);
 }
