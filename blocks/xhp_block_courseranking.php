@@ -44,11 +44,11 @@ function b_XHP_courseranking_show($options)
     $mydirname = $options[4];
     $mymodpath = "modules/$mydirname";
     include "$mymodpath/module_prefix.php";
-    $rsl = $xoopsDB->prefix($module_prefix . '_results');
-    $qiz = $xoopsDB->prefix($module_prefix . '_quiz');
-    $usr = $xoopsDB->prefix('users');
-    $sql
-            = "SELECT round(avg(score),2) AS average, $rsl.uid, $usr.uname FROM $rsl INNER JOIN $usr ON $rsl.uid=$usr.uid INNER JOIN $qiz ON $rsl.quiz_id=$qiz.artid WHERE secid=$options[3] GROUP BY $rsl.uid HAVING average >= $options[2] ORDER BY average $options[0] LIMIT $options[1]";
+    $rsl    = $xoopsDB->prefix($module_prefix . '_results');
+    $qiz    = $xoopsDB->prefix($module_prefix . '_quiz');
+    $usr    = $xoopsDB->prefix('users');
+    $sql    =
+        "SELECT round(avg(score),2) AS average, $rsl.uid, $usr.uname FROM $rsl INNER JOIN $usr ON $rsl.uid=$usr.uid INNER JOIN $qiz ON $rsl.quiz_id=$qiz.artid WHERE secid=$options[3] GROUP BY $rsl.uid HAVING average >= $options[2] ORDER BY average $options[0] LIMIT $options[1]";
     $result = $xoopsDB->query($sql);
     while ($myrow = $xoopsDB->fetchArray($result)) {
         $items            = array();
@@ -85,10 +85,8 @@ function b_XHP_courseranking_edit($options)
     }
     $form .= '>' . _MB_XHP_ITEMS_ASCEND . "</option>\n";
     $form .= "</select>\n";
-    $form .= '&nbsp;' . _MB_XHP_ITEMS_DISP . "&nbsp;<input type='text' size=5 name='options[]' value='" . $options[1]
-             . "' />&nbsp;" . _MB_XHP_ITEMS_ARTCLS . "<br>\n";
-    $form .= '&nbsp;' . _MB_XHP_MINIMUM . "&nbsp;<input type='text' size=5 name='options[]' value='"
-             . $options[2] . "' />&nbsp; %<br>";
+    $form .= '&nbsp;' . _MB_XHP_ITEMS_DISP . "&nbsp;<input type='text' size=5 name='options[]' value='" . $options[1] . "' />&nbsp;" . _MB_XHP_ITEMS_ARTCLS . "<br>\n";
+    $form .= '&nbsp;' . _MB_XHP_MINIMUM . "&nbsp;<input type='text' size=5 name='options[]' value='" . $options[2] . "' />&nbsp; %<br>";
     $form .= _MB_XHP_COURSE . "&nbsp;<select name='options[]'>";
     $mydirname = $options[4];
     $mymodpath = XOOPS_ROOT_PATH . "/modules/$mydirname";

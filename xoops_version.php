@@ -42,7 +42,7 @@ $modversion['license']     = 'GNU GPL 2.0 or later';
 $modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html';
 $modversion['license']     = 'GPL see LICENSE';
 $modversion['official']    = 0;
-$modversion['image']       = 'images/xoopshp_slogo.png';
+$modversion['image']       = 'images/logo_module.png';
 $modversion['hasMain']     = 1;
 $modversion['dirname']     = $mydirname;
 
@@ -68,7 +68,7 @@ $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 //$modversion['sqlfile']['postgresql'] = "sql/pgsql.sql";
 
 // Tables created by sql file (without prefix!)
-include 'module_prefix.php';
+include __DIR__ . '/module_prefix.php';
 $modversion['tables'][0] = $module_prefix . '_quiz';
 $modversion['tables'][1] = $module_prefix . '_results';
 $modversion['tables'][2] = $module_prefix . '_sections';

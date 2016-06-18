@@ -25,7 +25,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 
-include '../../../include/cp_header.php';
+include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
 echo "<H2>No need to call this script by hand.  Please simply update the module</H2>\n";

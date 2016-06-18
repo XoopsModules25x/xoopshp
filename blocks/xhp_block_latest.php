@@ -52,8 +52,7 @@ function b_XHP_latest_show($options)
     } else {
         $alert = " onClick='alert(\"" . _MD_ALERTGUEST . "\")'";
     }
-    $sql
-            = "SELECT artid, secid, title, posted, counter, display, expire FROM $mytablename WHERE display=1  ORDER BY posted $options[0] LIMIT $options[1]";
+    $sql    = "SELECT artid, secid, title, posted, counter, display, expire FROM $mytablename WHERE display=1  ORDER BY posted $options[0] LIMIT $options[1]";
     $result = $xoopsDB->query($sql);
     while ($myrow = $xoopsDB->fetchArray($result)) {
         $items            = array();
@@ -86,8 +85,7 @@ function b_XHP_latest_edit($options)
     }
     $form .= '>' . _MB_XHP_ITEMS_ASCEND . "</option>\n";
     $form .= "</select>\n";
-    $form .= '&nbsp;' . _MB_XHP_ITEMS_DISP . "&nbsp;<input type='text'  size=5 name='options[]' value='" . $options[1]
-             . "' />&nbsp;" . _MB_XHP_ITEMS_ARTCLS . '';
+    $form .= '&nbsp;' . _MB_XHP_ITEMS_DISP . "&nbsp;<input type='text'  size=5 name='options[]' value='" . $options[1] . "' />&nbsp;" . _MB_XHP_ITEMS_ARTCLS . '';
     $form .= "<input type='hidden' name='options[]' value='" . $options[2] . "'>";
 
     return $form;

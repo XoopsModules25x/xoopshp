@@ -15,7 +15,6 @@
  * @package
  * @since
  * @author       XOOPS Development Team
- * @version      $Id $
  */
 
 $path = dirname(dirname(dirname(__DIR__)));
@@ -27,15 +26,15 @@ xoops_load('XoopsRequest');
 
 global $xoopsModule;
 
-$moduleDirName = $GLOBALS['xoopsModule']->getVar('dirname');
+$mydirname = $GLOBALS['xoopsModule']->getVar('dirname');
 
 //if functions.php file exist
 //require_once dirname(__DIR__) . '/include/functions.php';
 
 // Load language files
-xoops_loadLanguage('admin', $moduleDirName);
-xoops_loadLanguage('modinfo', $moduleDirName);
-xoops_loadLanguage('main', $moduleDirName);
+xoops_loadLanguage('admin', $mydirname);
+xoops_loadLanguage('modinfo', $mydirname);
+xoops_loadLanguage('main', $mydirname);
 
 $pathIcon16      = '../' . $xoopsModule->getInfo('icons16');
 $pathIcon32      = '../' . $xoopsModule->getInfo('icons32');
