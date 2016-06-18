@@ -18,7 +18,7 @@ CREATE TABLE XHP_quiz (
   PRIMARY KEY  (artid),
   KEY idxxhp_quizsecid (secid),
   KEY idxxhp_quizcounterdesc (counter)
-) TYPE=MyISAM;
+) ENGINE = MYISAM;
 # --------------------------------------------------------
 CREATE TABLE XHP_sections (
   secid int(11) NOT NULL auto_increment,
@@ -29,7 +29,7 @@ CREATE TABLE XHP_sections (
   expire datetime NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (secid),
   KEY idxsectionssecname (secname)
-) TYPE=MyISAM;
+) ENGINE = MYISAM;
 # --------------------------------------------------------
 CREATE TABLE XHP_results (
   id bigint(14) unsigned NOT NULL auto_increment,
@@ -44,9 +44,9 @@ CREATE TABLE XHP_results (
   comment text NOT NULL,
   PRIMARY KEY  (id),
   FULLTEXT KEY host (host,ip,comment)
-) TYPE=MyISAM;
+) ENGINE = MYISAM;
 # --------------------------------------------------------
 CREATE TABLE XHP_config (
   teacher_email varchar(25) NOT NULL default '',
   multibyte int(11) NOT NULL default '0'
-)  TYPE=MyISAM;
+)  ENGINE = MYISAM;
