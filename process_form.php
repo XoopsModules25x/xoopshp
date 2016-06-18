@@ -38,43 +38,43 @@
 //	$referer = $_SERVER["HTTP_REFERER"];
 //}
 
-include_once '../../mainfile.php';
-include_once(XOOPS_ROOT_PATH . "/include/cp_functions.php");
+include_once dirname(dirname(__DIR__)) . '/mainfile.php';
+include_once(XOOPS_ROOT_PATH . '/include/cp_functions.php');
 global $db, $xoopsConfig, $xoopsUser, $xoopsModule, $xoopsObject, $xoopsDB;
 
-if ($_SERVER["HTTP_HOST"] != $_SERVER["SERVER_NAME"]) {
-    exit("Access Denied");
-} elseif (!isset($_COOKIE["xoopsHP_file_id"])) {
-    exit("Oops, a problem in the cookie!");
+if ($_SERVER['HTTP_HOST'] != $_SERVER['SERVER_NAME']) {
+    exit('Access Denied');
+} elseif (!isset($_COOKIE['xoopsHP_file_id'])) {
+    exit('Oops, a problem in the cookie!');
 }
 
 // Get the file number
-$quiz_id = intval($_COOKIE["xoopsHP_file_id"]);
+$quiz_id = (int)$_COOKIE['xoopsHP_file_id'];
 
 // Delete cookie -> $quiz_id
-setcookie("xoopsHP_file_id", "", time() - 3600);
+setcookie('xoopsHP_file_id', '', time() - 3600);
 
 // kazuo sudow
 // - non pair Open-Close Table.. More Header Written BUG.
 // OpenTable();
 
-$myts =& MyTextSanitizer::getInstance();
-$uid = ($xoopsUser) ? $xoopsUser->getVar('uid') : 0;
-$user_email = ($xoopsUser) ? $xoopsUser->getVar('email') : "";
-$uname = ($xoopsUser) ? $xoopsUser->getVar("uname") : "";
-$username = ($xoopsUser) ? $xoopsUser->getVar("name") : "";
+$myts = MyTextSanitizer::getInstance();
+$uid = $xoopsUser ? $xoopsUser->getVar('uid') : 0;
+$user_email = $xoopsUser ? $xoopsUser->getVar('email') : '';
+$uname = $xoopsUser ? $xoopsUser->getVar('uname') : '';
+$username = $xoopsUser ? $xoopsUser->getVar('name') : '';
 
 // Get the instructor's email addy etc
-$teacher_email = "";
+$teacher_email = '';
 include 'module_prefix.php';
 $result = $xoopsDB->query(
-    "SELECT secid, title, results_to FROM " . $xoopsDB->prefix($module_prefix . "_quiz") . " WHERE artid=$quiz_id"
+    'SELECT secid, title, results_to FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$quiz_id"
 );
 list($secid, $quiz_title, $teacher_email) = $xoopsDB->fetchRow($result);
-$secid = intval($secid);
+$secid = (int)$secid;
 include 'module_prefix.php';
 $result = $xoopsDB->query(
-    "SELECT secname FROM " . $xoopsDB->prefix($module_prefix . "_sections") . " WHERE secid=$secid"
+    'SELECT secname FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . " WHERE secid=$secid"
 );
 list($secname) = $xoopsDB->fetchRow($result);
 
@@ -82,8 +82,8 @@ list($secname) = $xoopsDB->fetchRow($result);
 // kazuo sudow --> EUC-JP (1.04) Sanitizer & mb_convert_encoding
 $userid = $myts->stripSlashesGPC($_POST['realname']);
 // Check if mbstring is supported --Yoshi
-if (XOOPS_USE_MULTIBYTES && function_exists("mb_convert_encoding") && $xoopsConfig['language'] == 'japanese') {
-    $userid = mb_convert_encoding($userid, "EUC-JP", "auto");
+if (XOOPS_USE_MULTIBYTES && function_exists('mb_convert_encoding') && $xoopsConfig['language'] === 'japanese') {
+    $userid = mb_convert_encoding($userid, 'EUC-JP', 'auto');
 }
 
 // Get Score --> %
@@ -92,35 +92,35 @@ $score = $myts->stripSlashesGPC($_POST['Score']);
 
 // kazuo sudow --> EUC-JP (1.04) Sanitizer
 $start_time = $myts->stripSlashesGPC($_POST['Start_Time']);
-$start_time = date("Y/m/d H:i:s", strtotime($start_time));
+$start_time = date('Y/m/d H:i:s', strtotime($start_time));
 
 // kazuo sudow --> EUC-JP (1.04) Sanitizer
 $end_time = $myts->stripSlashesGPC($_POST['End_Time']);
-$end_time = date("Y/m/d H:i:s", strtotime($end_time));
+$end_time = date('Y/m/d H:i:s', strtotime($end_time));
 
-$timestamp = date("Y/m/d H:i:s");
-$comment = "";
+$timestamp = date('Y/m/d H:i:s');
+$comment = '';
 
 // Write in the db
 if ($xoopsUser) {
     include 'module_prefix.php';
-    $query = "INSERT INTO " . $xoopsDB->prefix($module_prefix . "_results")
-        . " (quiz_id, uid, score, start_time, end_time, timestamp, host, ip, comment) VALUES ('";
+    $query = 'INSERT INTO ' . $xoopsDB->prefix($module_prefix . '_results')
+             . " (quiz_id, uid, score, start_time, end_time, timestamp, host, ip, comment) VALUES ('";
     $query .= $quiz_id . "','";
     $query .= $uid . "','";
     $query .= $score . "','";
     $query .= $start_time . "','";
     $query .= $end_time . "','";
     $query .= $timestamp . "','";
-    $query .= gethostbyaddr($_SERVER["REMOTE_ADDR"]) . "','";
-    $query .= $_SERVER["REMOTE_ADDR"] . "','";
+    $query .= gethostbyaddr($_SERVER['REMOTE_ADDR']) . "','";
+    $query .= $_SERVER['REMOTE_ADDR'] . "','";
     $query .= $comment . "')";
     $result = $xoopsDB->query($query);
     // Count up the counter for the completion
-    $quiz_id = intval($quiz_id);
+    $quiz_id = (int)$quiz_id;
     include 'module_prefix.php';
     $xoopsDB->query(
-        "UPDATE " . $xoopsDB->prefix($module_prefix . "_quiz") . " SET counter=counter+1 WHERE artid=$quiz_id"
+        'UPDATE ' . $xoopsDB->prefix($module_prefix . '_quiz') . " SET counter=counter+1 WHERE artid=$quiz_id"
     );
 }
 
@@ -132,20 +132,20 @@ if ($xoopsModuleConfig['mail_teacher'] || $xoopsModuleConfig['mail_user']) {
     // original
     // $subject = "XoopsHP Feedback: $uname, $quiz_title";
     // $subject = mb_encode_mimeheader(mb_convert_kana($subject,"KV"),"ISO-2022-JP","B");
-    $subject = htmlspecialchars($xoopsConfig['sitename']) . " " . $xoopsModule->getVar('name') . ":" . $quiz_title . " "
+    $subject = htmlspecialchars($xoopsConfig['sitename']) . ' ' . $xoopsModule->getVar('name') . ':' . $quiz_title . ' '
         . $uname;
     if (!empty($username)) {
-        $subject .= "(" . $username . ")";
+        $subject .= '(' . $username . ')';
     }
     if (!empty($userid)) {
-        $subject .= " (ID:" . $userid . ")";
+        $subject .= ' (ID:' . $userid . ')';
     }
 
     // message
     $msg = _XD_FB_ID . "\t$userid\n";
     $msg .= _XD_FB_USERNAME . "\t$uname";
     if (!empty($username)) {
-        $msg .= "(" . $username . ")\n";
+        $msg .= '(' . $username . ")\n";
     } else {
         $msg .= "\n";
     }
@@ -177,11 +177,11 @@ if ($xoopsModuleConfig['mail_teacher'] || $xoopsModuleConfig['mail_user']) {
 
 // WWW
 if (!$xoopsUser) {
-    $msg = "<H3>" . _XD_FB_GUEST . "</H3>\n";
+    $msg = '<H3>' . _XD_FB_GUEST . "</H3>\n";
 } elseif ($xoopsMailer->send() != false) {
-    $msg = "<H3>" . _XD_FB_OK . "</H3>\n";
+    $msg = '<H3>' . _XD_FB_OK . "</H3>\n";
 } else {
-    $msg = "<H3>" . _XD_FB_NG . "</H3>\n";
+    $msg = '<H3>' . _XD_FB_NG . "</H3>\n";
 }
 
 // kazuo sudow 1.04
@@ -193,7 +193,7 @@ $msg .= "<TR><TD class='even'>" . _XD_FB_ID . "</TD><TD class='even'>$userid</TD
 if ($xoopsUser) {
     $msg .= "<TR><TD class='even'>" . _XD_FB_USERNAME . "</TD><TD class='even'>$uname";
     if (!empty($username)) {
-        $msg .= "(" . $username . ")</TD></TR>\n";
+        $msg .= '(' . $username . ")</TD></TR>\n";
     } else {
         $msg .= "</TD></TR>\n";
     }
@@ -226,20 +226,24 @@ $msg .= "</center>\n";
 my_wrapper($msg);
 exit();
 
+/**
+ * @param $s
+ * @return mixed|string
+ */
 function multibyte($s)
 {
     // kazuo sudow global app
     global $xoopsConfig;
 
-    if (XOOPS_USE_MULTIBYTES && function_exists("mb_convert_encoding") && $xoopsConfig['language'] == 'japanese') {
+    if (XOOPS_USE_MULTIBYTES && function_exists('mb_convert_encoding') && $xoopsConfig['language'] == 'japanese') {
         if (get_magic_quotes_gpc()) {
             // kazuo sudow - encode auto & EUC-JP
             // return mb_convert_encoding(stripslashes($s), _CHARSET, "EUC-JP,UTF-8,Shift_JIS,JIS");
-            return mb_convert_encoding(stripslashes($s), "EUC-JP", "auto");
+            return mb_convert_encoding(stripslashes($s), 'EUC-JP', 'auto');
         } else {
             // kazuo sudow - encode auto
             // return mb_convert_encoding($s, _CHARSET, "EUC-JP,UTF-8,Shift_JIS,JIS");
-            return mb_convert_encoding($s, "EUC-JP", "auto");
+            return mb_convert_encoding($s, 'EUC-JP', 'auto');
         }
     } else {
         if (get_magic_quotes_gpc()) {
@@ -250,22 +254,25 @@ function multibyte($s)
     }
 }
 
+/**
+ * @param $msg
+ */
 function my_wrapper($msg)
 {
     global $xoopsConfig, $xoopsTheme, $xoopsConfigMetaFooter;
 
-    $myts =& MyTextSanitizer::getInstance();
+    $myts = MyTextSanitizer::getInstance();
     if ($xoopsConfig['gzip_compression'] == 1) {
-        ob_start("ob_gzhandler");
+        ob_start('ob_gzhandler');
     } else {
         ob_start();
     }
     if (!headers_sent()) {
         header('Content-Type:text/html; charset=' . _CHARSET);
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
         header('Cache-Control: no-store, no-cache, max-age=1, s-maxage=1, must-revalidate, post-check=0, pre-check=0');
-        header("Pragma: no-cache");
+        header('Pragma: no-cache');
     }
 
     echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>";
@@ -289,7 +296,7 @@ function my_wrapper($msg)
         //echo '<style type="text/css" media="all"><!-- @import url('.$themecss.'); --></style>';
     }
     echo '</head><body>';
-    echo "<br />"; // kazuo sudow <BR> code app
+    echo '<br />'; // kazuo sudow <BR> code app
     echo $msg;
     echo '</body></html>';
 }

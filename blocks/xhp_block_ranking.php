@@ -31,17 +31,20 @@
 // $options[2]: avg threshold //
 // $options[3]: module dirname //
 
-
+/**
+ * @param $options
+ * @return array
+ */
 function b_XHP_ranking_show($options)
 {
     global $xoopsDB, $xoopsUser, $xoopsConfig;
-    $myts      =& MyTextSanitizer::getInstance();
+    $myts      = MyTextSanitizer::getInstance();
     $block     = array();
     $mydirname = $options[3];
     $mymodpath = "modules/$mydirname";
     include "$mymodpath/module_prefix.php";
-    $rsl = $xoopsDB->prefix($module_prefix . "_results");
-    $usr = $xoopsDB->prefix("users");
+    $rsl = $xoopsDB->prefix($module_prefix . '_results');
+    $usr = $xoopsDB->prefix('users');
     $sql
             = "SELECT round(avg(score),2) AS average, $rsl.uid, $usr.uname FROM $rsl INNER JOIN $usr ON $rsl.uid=$usr.uid GROUP BY $rsl.uid HAVING average >= $options[2] ORDER BY average $options[0] LIMIT $options[1]";
     $result = $xoopsDB->query($sql);
@@ -56,24 +59,28 @@ function b_XHP_ranking_show($options)
     return $block;
 }
 
+/**
+ * @param $options
+ * @return string
+ */
 function b_XHP_ranking_edit($options)
 {
     $form = _MB_XHP_ITEMS_ORDER . "&nbsp;<select name='options[]'>";
     $form .= "<option value='DESC'";
-    if ($options[0] == "DESC") {
+    if ($options[0] === 'DESC') {
         $form .= " selected='selected'";
     }
-    $form .= ">" . _MB_XHP_ITEMS_DESC . "</option>\n";
+    $form .= '>' . _MB_XHP_ITEMS_DESC . "</option>\n";
     $form .= "<option value=''";
-    if ($options[0] == "") {
+    if ($options[0] === '') {
         $form .= " selected='selected'";
     }
-    $form .= ">" . _MB_XHP_ITEMS_ASCEND . "</option>\n";
+    $form .= '>' . _MB_XHP_ITEMS_ASCEND . "</option>\n";
     $form .= "</select>\n";
-    $form .= "&nbsp;" . _MB_XHP_ITEMS_DISP . "&nbsp;<input type='text' size=5 name='options[]' value='" . $options[1]
-        . "' />&nbsp;" . _MB_XHP_ITEMS_ARTCLS . "<br>\n";
-    $form .= "&nbsp;" . _MB_XHP_MINIMUM . "&nbsp;<input type='text' size=5 name='options[]' value='"
-        . $options[2] . "' />&nbsp; %";
+    $form .= '&nbsp;' . _MB_XHP_ITEMS_DISP . "&nbsp;<input type='text' size=5 name='options[]' value='" . $options[1]
+             . "' />&nbsp;" . _MB_XHP_ITEMS_ARTCLS . "<br>\n";
+    $form .= '&nbsp;' . _MB_XHP_MINIMUM . "&nbsp;<input type='text' size=5 name='options[]' value='"
+             . $options[2] . "' />&nbsp; %";
     $form .= "<input type='hidden' name='options[]' value='" . $options[3] . "'>";
 
     return $form;
