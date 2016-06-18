@@ -30,17 +30,12 @@ include __DIR__ . '/header.php';
 // License check: Add access permission to the guest group if license hasn't been purchased
 $groupperm_handler = xoops_getHandler('groupperm', 'xoopshp');
 if (!$xoopsModuleConfig['has_license']
-    && !$groupperm_handler->checkRight(
-        'module_read',
-        $xoopsModule->getVar('mid'),
-        XOOPS_GROUP_ANONYMOUS
-    )
+    && !$groupperm_handler->checkRight('module_read', $xoopsModule->getVar('mid'), XOOPS_GROUP_ANONYMOUS)
 ) {
     //    $groupperm_handler->addRight('module_read', $xoopsModule->getVar('mid'), XOOPS_GROUP_ANONYMOUS);
     // Heck, can't figure out how to get around the restriction in the kernel, so here's a tentative workaround.
-    $query  = 'INSERT INTO ' . $xoopsDB->prefix('group_permission')
-              . ' (gperm_name, gperm_itemid, gperm_groupid, gperm_modid) VALUES (' . $xoopsDB->quoteString('module_read')
-              . ', ' . $xoopsModule->getVar('mid') . ', ' . XOOPS_GROUP_ANONYMOUS . ', 1)';
+    $query  = 'INSERT INTO ' . $xoopsDB->prefix('group_permission') . ' (gperm_name, gperm_itemid, gperm_groupid, gperm_modid) VALUES (' . $xoopsDB->quoteString('module_read') . ', '
+              . $xoopsModule->getVar('mid') . ', ' . XOOPS_GROUP_ANONYMOUS . ', 1)';
     $result = $xoopsDB->queryF($query);
 }
 
@@ -57,10 +52,7 @@ function listsections()
     include XOOPS_ROOT_PATH . '/header.php';
     $myts = MyTextSanitizer::getInstance();
     include __DIR__ . '/module_prefix.php';
-    $result = $xoopsDB->query(
-        'SELECT secid, secname, secdesc, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections')
-        . ' ORDER BY secname'
-    );
+    $result = $xoopsDB->query('SELECT secid, secname, secdesc, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . ' ORDER BY secname');
     echo "<div style='text-align: center;'>";
     echo "<h2 align='center'>";
     printf($xoopsModuleConfig['welcome'], htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES));
@@ -70,9 +62,8 @@ function listsections()
     echo "<table border='0' cellspacing='1' cellpadding ='3' class='outer' width ='100%'><tr>";
     echo "<td align='left' valign='top'><b>" . _MD_RETURN2INDEX . '</b></td>';
     if ($xoopsUser) {
-        echo
-            "<td align='right' valign='center'><a href='index.php?op=portfolio&amp;secid=0&amp;sort_key=timestamp'><span style='font-weight:bold;font-size:larger;'>"
-            . _MD_LT_PORTFOLIO . '</span></a></td>';
+        echo "<td align='right' valign='center'><a href='index.php?op=portfolio&amp;secid=0&amp;sort_key=timestamp'><span style='font-weight:bold;font-size:larger;'>" . _MD_LT_PORTFOLIO
+             . '</span></a></td>';
     }
     echo '</tr></table>';
 
@@ -112,10 +103,10 @@ function listsections()
                 include __DIR__ . '/module_prefix.php';
                 $quiz_db = $xoopsDB->prefix($module_prefix . '_quiz');
                 if ($isModAdmin) {
-                    $query
-                        = "SELECT DISTINCT $result_db.quiz_id, $quiz_db.artid, $quiz_db.secid FROM $result_db, $quiz_db WHERE $quiz_db.artid = $result_db.quiz_id AND $quiz_db.secid = $secid";
+                    $query = "SELECT DISTINCT $result_db.quiz_id, $quiz_db.artid, $quiz_db.secid FROM $result_db, $quiz_db WHERE $quiz_db.artid = $result_db.quiz_id AND $quiz_db.secid = $secid";
                 } else {
-                    $query = "SELECT DISTINCT $result_db.quiz_id, $quiz_db.artid, $quiz_db.secid FROM $result_db, $quiz_db WHERE $quiz_db.artid = $result_db.quiz_id AND $quiz_db.secid = $secid AND uid="
+                    $query =
+                        "SELECT DISTINCT $result_db.quiz_id, $quiz_db.artid, $quiz_db.secid FROM $result_db, $quiz_db WHERE $quiz_db.artid = $result_db.quiz_id AND $quiz_db.secid = $secid AND uid="
                         . $xoopsUser->getVar('uid');
                 }
                 $results = $xoopsDB->query($query);
@@ -126,8 +117,7 @@ function listsections()
                 if ($expire > $currenttime) {
                     echo "<td class='even'>" . $expire . '</td>';
                 } else {
-                    echo "<td class='even'>" . $expire . "<span style='color:#ff0000;'>(" . _MD_LT_EXPIRED
-                         . ')</span></td>';
+                    echo "<td class='even'>" . $expire . "<span style='color:#ff0000;'>(" . _MD_LT_EXPIRED . ')</span></td>';
                 }
             } else {
                 echo "<td class='even'>" . '-------------------' . '</td>';
@@ -138,10 +128,7 @@ function listsections()
     echo '</table>';
 
     echo "<table border='0' cellspacing='1' cellpadding ='3' width ='100%'><tr>";
-    echo "<td align='right'><a href='" . _MD_CREDITSITE . "' target='_credit'/ > Version " . round(
-            $xoopsModule->getVar('version') / 100,
-            2
-        ) . '</a></td>';
+    echo "<td align='right'><a href='" . _MD_CREDITSITE . "' target='_credit'/ > Version " . round($xoopsModule->getVar('version') / 100, 2) . '</a></td>';
     echo '</tr></table>';
     echo '</div>';
     echo '</div>';
@@ -158,9 +145,7 @@ function listarticles($secid)
     $myts  = MyTextSanitizer::getInstance();
     $secid = (int)$secid;
     include __DIR__ . '/module_prefix.php';
-    $result = $xoopsDB->query(
-        'SELECT secname, secdesc, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . " WHERE secid=$secid"
-    );
+    $result = $xoopsDB->query('SELECT secname, secdesc, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . " WHERE secid=$secid");
     list($secname, $secdesc, $display, $expire) = $xoopsDB->fetchRow($result);
     $secname = $myts->displayTarea($myts->stripSlashesGPC($secname));
     $secdesc = $myts->displayTarea($myts->stripSlashesGPC($secdesc));
@@ -173,21 +158,16 @@ function listarticles($secid)
         redirect_header('index.php', 2, _AM_MSG_ACCESS_ERROR);
     }
     include __DIR__ . '/module_prefix.php';
-    $result = $xoopsDB->query(
-        'SELECT artid, secid, title, posted, counter, display, expire FROM ' . $xoopsDB->prefix(
-            $module_prefix . '_quiz'
-        ) . " WHERE secid=$secid" . ' ORDER BY title'
-    );
+    $result = $xoopsDB->query('SELECT artid, secid, title, posted, counter, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE secid=$secid" . ' ORDER BY title');
     echo "<div style='text-align: center;'>";
     echo "<h2 align='center'>$secname</h2>";
     echo "<h4 align='center'>" . _MD_THEFOLLOWING . '</h4>';
     echo "<div id='content'>";
     echo "<table border='0' cellspacing='1' cellpadding ='3' class='outer' width ='100%'><tr>";
-    echo "<td align='left' valign='top'><b><a href=index.php>" . _MD_RETURN2INDEX . '</a> -> ' . _MD_RETURN2QUIZ
-         . '</b></td>';
+    echo "<td align='left' valign='top'><b><a href=index.php>" . _MD_RETURN2INDEX . '</a> -> ' . _MD_RETURN2QUIZ . '</b></td>';
     if ($xoopsUser) {
-        echo "<td align='right' valign='center'><a href='index.php?op=portfolio&amp;secid=$secid&amp;sort_key=timestamp'><span style='font-weight:bold;font-size:larger;'>"
-            . _MD_LT_PORTFOLIO . '</span></a></td>';
+        echo "<td align='right' valign='center'><a href='index.php?op=portfolio&amp;secid=$secid&amp;sort_key=timestamp'><span style='font-weight:bold;font-size:larger;'>" . _MD_LT_PORTFOLIO
+             . '</span></a></td>';
         $alert = '';
     } else {
         $alert = " onClick='alert(\"" . _MD_ALERTGUEST . "\")'";
@@ -222,11 +202,9 @@ function listarticles($secid)
             if ($xoopsUser) {
                 $uid = $xoopsUser->getVar('uid');
                 include __DIR__ . '/module_prefix.php';
-                $query1 = 'SELECT DISTINCT uid FROM ' . $xoopsDB->prefix($module_prefix . '_results')
-                          . " WHERE quiz_id=$artid";
+                $query1 = 'SELECT DISTINCT uid FROM ' . $xoopsDB->prefix($module_prefix . '_results') . " WHERE quiz_id=$artid";
                 include __DIR__ . '/module_prefix.php';
-                $query2 = 'SELECT score FROM ' . $xoopsDB->prefix($module_prefix . '_results')
-                          . " WHERE quiz_id=$artid AND uid=$uid";
+                $query2 = 'SELECT score FROM ' . $xoopsDB->prefix($module_prefix . '_results') . " WHERE quiz_id=$artid AND uid=$uid";
                 if ($isModAdmin) {
                     $results_exist = $xoopsDB->query($query1);
                     $done_by       = $xoopsDB->query($query1);
@@ -237,24 +215,19 @@ function listarticles($secid)
                 $results_exist = $xoopsDB->getRowsNum($results_exist);
             } else {
                 include __DIR__ . '/module_prefix.php';
-                $query1  = 'SELECT DISTINCT uid FROM ' . $xoopsDB->prefix($module_prefix . '_results')
-                           . " WHERE quiz_id=$artid";
+                $query1  = 'SELECT DISTINCT uid FROM ' . $xoopsDB->prefix($module_prefix . '_results') . " WHERE quiz_id=$artid";
                 $done_by = $xoopsDB->query($query1);
             }
             $done_by = $xoopsDB->getRowsNum($done_by);
             echo "<td class='even' align='center'>$done_by</td>";
             include __DIR__ . '/module_prefix.php';
-            $site_max = $xoopsDB->query(
-                'SELECT MAX(score), AVG(score) FROM ' . $xoopsDB->prefix($module_prefix . '_results') . " WHERE quiz_id = $artid"
-            );
+            $site_max = $xoopsDB->query('SELECT MAX(score), AVG(score) FROM ' . $xoopsDB->prefix($module_prefix . '_results') . " WHERE quiz_id = $artid");
             list($site_max, $site_avg) = $xoopsDB->fetchRow($site_max);
             if ($isModAdmin) {
                 echo "<td class='even' align='center'>" . round($site_avg) . '</td>';
             } elseif ($xoopsUser) {
                 include __DIR__ . '/module_prefix.php';
-                $my_max = $xoopsDB->query(
-                    'SELECT MAX(score) FROM ' . $xoopsDB->prefix($module_prefix . '_results') . " WHERE uid = $uid AND quiz_id = $artid"
-                );
+                $my_max = $xoopsDB->query('SELECT MAX(score) FROM ' . $xoopsDB->prefix($module_prefix . '_results') . " WHERE uid = $uid AND quiz_id = $artid");
                 list($my_max) = $xoopsDB->fetchRow($my_max);
                 echo "<td class='even' align='center'>$my_max</td>";
             }
@@ -263,35 +236,28 @@ function listarticles($secid)
                 if ($expire > $currenttime) {
                     echo "<td class='even'>" . $expire . '</td>';
                 } else {
-                    echo "<td class='even'>" . $expire . "<span style='color:#ff0000;'>(" . _MD_LT_EXPIRED
-                         . ')</span></td>';
+                    echo "<td class='even'>" . $expire . "<span style='color:#ff0000;'>(" . _MD_LT_EXPIRED . ')</span></td>';
                 }
             } else {
                 echo "<td class='even'>" . '-------------------' . '</td>';
             }
             if ($xoopsUser) {
                 if ($results_exist) {
-                    echo "<td class='odd' align='center'><a href='index.php?op=viewresults&amp;artid=$artid&amp;sort_key=timestamp'>"
-                        . _MD_LT_RESULTS . '</a></td>';
+                    echo "<td class='odd' align='center'><a href='index.php?op=viewresults&amp;artid=$artid&amp;sort_key=timestamp'>" . _MD_LT_RESULTS . '</a></td>';
                 } else {
                     echo "<td class='odd' align='center'>&nbsp;</td>";
                 }
             }
             if ($isModAdmin) {
-                echo "<td class='odd' align='center'><a href='admin/index.php?op=secartedit&amp;artid=$artid'>"
-                    . _MD_EDIT . '</a></td>';
-                echo "<td class='odd' align='center'><a href='admin/index.php?op=secartdelete&amp;artid=$artid'>"
-                    . _MD_DELETE . '</a></td>';
+                echo "<td class='odd' align='center'><a href='admin/index.php?op=secartedit&amp;artid=$artid'>" . _MD_EDIT . '</a></td>';
+                echo "<td class='odd' align='center'><a href='admin/index.php?op=secartdelete&amp;artid=$artid'>" . _MD_DELETE . '</a></td>';
             }
             echo '</tr>';
         }
     }
     echo '</table>';
     echo "<table border='0' cellspacing='1' cellpadding ='3' width ='100%'><tr>";
-    echo "<td align='right'><a href='" . _MD_CREDITSITE . "' target='_credit'/ > Version " . round(
-            $xoopsModule->getVar('version') / 100,
-            2
-        ) . '</a></td>';
+    echo "<td align='right'><a href='" . _MD_CREDITSITE . "' target='_credit'/ > Version " . round($xoopsModule->getVar('version') / 100, 2) . '</a></td>';
     echo '</tr></table>';
     echo '</div>';
     echo '</div>';
@@ -307,9 +273,7 @@ function viewarticle($artid)
     $myts  = MyTextSanitizer::getInstance();
     $artid = (int)$artid;
     include __DIR__ . '/module_prefix.php';
-    $result = $xoopsDB->query(
-        'SELECT secid, title, content, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$artid"
-    );
+    $result = $xoopsDB->query('SELECT secid, title, content, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$artid");
     list($secid, $title, $content, $display, $expire) = $xoopsDB->fetchRow($result);
     $secid       = (int)$secid;
     $display     = (int)$display;
@@ -317,9 +281,7 @@ function viewarticle($artid)
     $currenttime = formatTimestamp(time(), 'Y-m-d H:i:s');
     if ($display) {
         include __DIR__ . '/module_prefix.php';
-        $result2 = $xoopsDB->query(
-            'SELECT display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . " WHERE secid=$secid"
-        );
+        $result2 = $xoopsDB->query('SELECT display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . " WHERE secid=$secid");
         list($display2, $expire2) = $xoopsDB->fetchRow($result2);
         $display2 = (int)$display2;
         $expire2  = $myts->stripSlashesGPC($expire2);
@@ -358,9 +320,7 @@ function viewresults($artid, $sort_key)
     //Retrieve table data by users
     $artid = (int)$artid;
     include __DIR__ . '/module_prefix.php';
-    $result2 = $xoopsDB->query(
-        'SELECT title, posted, secid FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$artid"
-    );
+    $result2 = $xoopsDB->query('SELECT title, posted, secid FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$artid");
     list($title, $posted, $secid) = $xoopsDB->fetchRow($result2);
     $title  = $myts->displayTarea($title);
     $posted = $myts->displayTarea($posted);
@@ -368,24 +328,25 @@ function viewresults($artid, $sort_key)
     $result_db = $xoopsDB->prefix($module_prefix . '_results');
     $users_db  = $xoopsDB->prefix('users');
     if ($isModAdmin) {
-        $query = "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.timestamp, $result_db.comment, $users_db.uname, $users_db.name FROM $result_db, $users_db WHERE $result_db.uid = $users_db.uid AND $result_db.quiz_id = $artid ORDER BY "
+        $query =
+            "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.timestamp, $result_db.comment, $users_db.uname, $users_db.name FROM $result_db, $users_db WHERE $result_db.uid = $users_db.uid AND $result_db.quiz_id = $artid ORDER BY "
             . $sort_key;
     } elseif ($xoopsUser) {
         $uid   = $xoopsUser->getVar('uid');
-        $query = "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.timestamp,  $result_db.comment, $users_db.uname, $users_db.name FROM $result_db, $users_db WHERE $result_db.uid = $uid AND $result_db.uid = $users_db.uid AND $result_db.quiz_id = $artid ORDER BY "
+        $query =
+            "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.timestamp,  $result_db.comment, $users_db.uname, $users_db.name FROM $result_db, $users_db WHERE $result_db.uid = $uid AND $result_db.uid = $users_db.uid AND $result_db.quiz_id = $artid ORDER BY "
             . $sort_key;
     }
     $result = $xoopsDB->query($query);
 
     echo "<div style='text-align: center;'>";
-    echo "<h2 align='center'>" . _MD_LT_RESULTS
-        . ": <a href='index.php?op=viewarticle&amp;artid=$artid' target='quiz_window'><span style='font-weight:bold;font-size:larger;'>$title</span></a></h2>";
+    echo "<h2 align='center'>" . _MD_LT_RESULTS . ": <a href='index.php?op=viewarticle&amp;artid=$artid' target='quiz_window'><span style='font-weight:bold;font-size:larger;'>$title</span></a></h2>";
     echo "<div id='content'>";
     echo "<table border='0' cellspacing='1' cellpadding ='3' class='outer' width ='100%'><tr>";
-    echo "<td align='left' valign='top'><b><a href=index.php>" . _MD_RETURN2INDEX . "</a> -> <a href='index.php?op=listarticles&amp;secid=$secid'>"
-        . _MD_RETURN2QUIZ . '</a> -> ' . _MD_RESULTLIST . ' (' . _MD_RESULT_SIMPLE . ') </b></td>';
-    echo "<td align='right' valign='center'><a href='index.php?op=viewdetails&amp;artid=$artid&amp;sort_key=end_time'><span style='font-weight:bold;font-size:larger;'>"
-        . _MD_RESULT_DETAIL . '</span></a></td>';
+    echo "<td align='left' valign='top'><b><a href=index.php>" . _MD_RETURN2INDEX . "</a> -> <a href='index.php?op=listarticles&amp;secid=$secid'>" . _MD_RETURN2QUIZ . '</a> -> ' . _MD_RESULTLIST
+         . ' (' . _MD_RESULT_SIMPLE . ') </b></td>';
+    echo "<td align='right' valign='center'><a href='index.php?op=viewdetails&amp;artid=$artid&amp;sort_key=end_time'><span style='font-weight:bold;font-size:larger;'>" . _MD_RESULT_DETAIL
+         . '</span></a></td>';
     echo '</tr></table>';
     echo "<table border='0' cellspacing='1' cellpadding ='3' class='outer' width ='100%'>";
     echo '<tr>';
@@ -408,18 +369,14 @@ function viewresults($artid, $sort_key)
         echo "<td class='even' align='center'>$score</td>";
         echo "<td class='even' align='center'>$timestamp</td>";
         if ($isModAdmin) {
-            echo "<td class='odd' align='center'><a href='admin/index.php?op=resultdelete&amp;res_id=$res_id'>"
-                . _MD_DELETE . '</a></td>';
+            echo "<td class='odd' align='center'><a href='admin/index.php?op=resultdelete&amp;res_id=$res_id'>" . _MD_DELETE . '</a></td>';
         }
         echo '</tr>';
     }
     echo '</table>';
 
     echo "<table border='0' cellspacing='1' cellpadding ='3' width ='100%'><tr>";
-    echo "<td align='right'><a href='" . _MD_CREDITSITE . "' target='_credit'/ > Version " . round(
-            $xoopsModule->getVar('version') / 100,
-            2
-        ) . '</a></td>';
+    echo "<td align='right'><a href='" . _MD_CREDITSITE . "' target='_credit'/ > Version " . round($xoopsModule->getVar('version') / 100, 2) . '</a></td>';
     echo '</tr></table>';
     echo '</div>';
     echo '</div>';
@@ -439,9 +396,7 @@ function viewdetails($artid, $sort_key)
     $sort_key = $myts->addSlashes($sort_key);
     //Retrieve table data by users
     include __DIR__ . '/module_prefix.php';
-    $result2 = $xoopsDB->query(
-        'SELECT title, posted, secid FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$artid"
-    );
+    $result2 = $xoopsDB->query('SELECT title, posted, secid FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$artid");
     list($title, $posted, $secid) = $xoopsDB->fetchRow($result2);
     $title  = $myts->displayTarea($title);
     $posted = $myts->displayTarea($posted);
@@ -450,24 +405,26 @@ function viewdetails($artid, $sort_key)
     $result_db = $xoopsDB->prefix($module_prefix . '_results');
     $users_db  = $xoopsDB->prefix('users');
     if ($isModAdmin) {
-        $query = "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.start_time, $result_db.end_time, $result_db.timestamp, $result_db.host, $result_db.ip, $result_db.comment, $users_db.uname, $users_db.name FROM $result_db, $users_db WHERE $result_db.uid = $users_db.uid AND $result_db.quiz_id = $artid ORDER BY "
+        $query =
+            "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.start_time, $result_db.end_time, $result_db.timestamp, $result_db.host, $result_db.ip, $result_db.comment, $users_db.uname, $users_db.name FROM $result_db, $users_db WHERE $result_db.uid = $users_db.uid AND $result_db.quiz_id = $artid ORDER BY "
             . $sort_key;
     } elseif ($xoopsUser) {
-        $query = "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.start_time, $result_db.end_time, $result_db.timestamp, $result_db.host, $result_db.ip, $result_db.comment, $users_db.uname, $users_db.name FROM $result_db, $users_db WHERE $result_db.uid = $uid AND $result_db.uid = $users_db.uid AND $result_db.quiz_id = $artid ORDER BY "
+        $query =
+            "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.start_time, $result_db.end_time, $result_db.timestamp, $result_db.host, $result_db.ip, $result_db.comment, $users_db.uname, $users_db.name FROM $result_db, $users_db WHERE $result_db.uid = $uid AND $result_db.uid = $users_db.uid AND $result_db.quiz_id = $artid ORDER BY "
             . $sort_key;
     }
     $result = $xoopsDB->query($query);
 
     echo "<div style='text-align: center;'>";
-    echo "<h2 align='center'>" . _MD_RESULT_DETAIL . ": <a href='index.php?op=viewarticle&amp;artid=$artid' target='quiz_window'><span style='font-weight:bold;font-size:larger;'>"
-        . $title . '</span></a></h2>';
+    echo "<h2 align='center'>" . _MD_RESULT_DETAIL . ": <a href='index.php?op=viewarticle&amp;artid=$artid' target='quiz_window'><span style='font-weight:bold;font-size:larger;'>" . $title
+         . '</span></a></h2>';
     echo "<div id='content'>";
     echo "<table border='0' cellspacing='1' cellpadding ='3' class='outer' width ='100%'><tr>";
-    echo "<td align='left' valign='top'><b><a href=index.php>" . _MD_RETURN2INDEX . "</a> -> <a href='index.php?op=listarticles&amp;secid=$secid'>"
-        . _MD_RETURN2QUIZ . '</a> -> ' . _MD_RESULTLIST . ' (' . _MD_RESULT_DETAIL . ') </b></td>';
+    echo "<td align='left' valign='top'><b><a href=index.php>" . _MD_RETURN2INDEX . "</a> -> <a href='index.php?op=listarticles&amp;secid=$secid'>" . _MD_RETURN2QUIZ . '</a> -> ' . _MD_RESULTLIST
+         . ' (' . _MD_RESULT_DETAIL . ') </b></td>';
     if ($xoopsUser) {
-        echo "<td align='right' valign='center'><a href='index.php?op=viewresults&amp;artid=$artid&amp;sort_key=timestamp'><span style='font-weight:bold;font-size:larger;'>"
-            . _MD_RESULT_SIMPLE . '</span></a></td>';
+        echo "<td align='right' valign='center'><a href='index.php?op=viewresults&amp;artid=$artid&amp;sort_key=timestamp'><span style='font-weight:bold;font-size:larger;'>" . _MD_RESULT_SIMPLE
+             . '</span></a></td>';
     }
     echo '</tr></table>';
 
@@ -475,8 +432,7 @@ function viewdetails($artid, $sort_key)
     echo '<tr>';
     echo "<th><a href='index.php?op=viewdetails&amp;artid=$artid&amp;sort_key=uname'>" . _MD_LT_STUDENT . '</a></th>';
     echo "<th><a href='index.php?op=viewdetails&amp;artid=$artid&amp;sort_key=score'>" . _MD_LT_SCORE . '</th>';
-    echo
-        "<th><a href='index.php?op=viewdetails&amp;artid=$artid&amp;sort_key=start_time'>" . _XD_FB_START . '</a></th>';
+    echo "<th><a href='index.php?op=viewdetails&amp;artid=$artid&amp;sort_key=start_time'>" . _XD_FB_START . '</a></th>';
     echo "<th><a href='index.php?op=viewdetails&amp;artid=$artid&amp;sort_key=end_time'>" . _XD_FB_END . '</a></th>';
     echo "<th><a href='index.php?op=viewdetails&amp;artid=$artid&amp;sort_key=host'>" . _XD_FB_HOST . '</a></th>';
     echo "<th><a href='index.php?op=viewdetails&amp;artid=$artid&amp;sort_key=ip'>" . _XD_FB_IP . '</a></th>';
@@ -484,9 +440,7 @@ function viewdetails($artid, $sort_key)
         echo '<th>' . _MD_LT_ACTION . '</th>';
     }
     echo '</tr>';
-    while (
-    list($res_id, $quiz_id, $uid, $score, $start_time, $end_time, $timestamp, $host, $ip, $comment, $uname, $name)
-        = $xoopsDB->fetchRow($result)) {
+    while (list($res_id, $quiz_id, $uid, $score, $start_time, $end_time, $timestamp, $host, $ip, $comment, $uname, $name) = $xoopsDB->fetchRow($result)) {
         echo '<tr>';
         if ($xoopsUser) {
             echo "<td nowrap class='even'>" . $uname;
@@ -501,8 +455,7 @@ function viewdetails($artid, $sort_key)
         echo "<td class='even' align='center'>$host</td>";
         echo "<td class='even' align='center'>$ip</td>";
         if ($isModAdmin) {
-            echo "<td class='odd' align='center' nowrap><a href='admin/index.php?op=resultdelete&amp;res_id=$res_id'>"
-                . _MD_DELETE . '</td>';
+            echo "<td class='odd' align='center' nowrap><a href='admin/index.php?op=resultdelete&amp;res_id=$res_id'>" . _MD_DELETE . '</td>';
         }
         echo '</tr>';
     }
@@ -510,10 +463,7 @@ function viewdetails($artid, $sort_key)
     echo '</table>';
 
     echo "<table border='0' cellspacing='1' cellpadding ='3' width ='100%'><tr>";
-    echo "<td align='right'><a href='" . _MD_CREDITSITE . "' target='_credit'/ > Version " . round(
-            $xoopsModule->getVar('version') / 100,
-            2
-        ) . '</a></td>';
+    echo "<td align='right'><a href='" . _MD_CREDITSITE . "' target='_credit'/ > Version " . round($xoopsModule->getVar('version') / 100, 2) . '</a></td>';
     echo '</tr></table>';
     echo '</div>';
     echo '</div>';
@@ -542,13 +492,15 @@ function portfolio($sort_key, $secid)
         $section_query = "AND $quiz_db.secid = $secid ";
     }
     if ($isModAdmin) {
-        $query     = "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.start_time, $result_db.end_time, $result_db.timestamp, $result_db.host, $result_db.ip, $result_db.comment, $quiz_db.artid, $quiz_db.secid, $quiz_db.title, $users_db.uid, $users_db.uname, $users_db.name FROM $result_db, $quiz_db, $users_db WHERE $quiz_db.artid = $result_db.quiz_id AND $result_db.uid = $users_db.uid "
+        $query     =
+            "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.start_time, $result_db.end_time, $result_db.timestamp, $result_db.host, $result_db.ip, $result_db.comment, $quiz_db.artid, $quiz_db.secid, $quiz_db.title, $users_db.uid, $users_db.uname, $users_db.name FROM $result_db, $quiz_db, $users_db WHERE $quiz_db.artid = $result_db.quiz_id AND $result_db.uid = $users_db.uid "
             . $section_query . ' ORDER BY ' . $sort_key;
         $user_name = '';
     } elseif ($xoopsUser) {
         $user_id   = $xoopsUser->getVar('uid');
         $user_name = ' (' . $xoopsUser->getVar('uname') . ')';
-        $query     = "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.start_time, $result_db.end_time, $result_db.timestamp, $result_db.host, $result_db.ip, $result_db.comment, $quiz_db.artid, $quiz_db.secid, $quiz_db.title, $users_db.uid, $users_db.uname, $users_db.name FROM $result_db, $quiz_db, $users_db WHERE $quiz_db.artid = $result_db.quiz_id AND $result_db.uid = $users_db.uid AND $result_db.uid=$user_id "
+        $query     =
+            "SELECT $result_db.id, $result_db.quiz_id, $result_db.uid, $result_db.score, $result_db.start_time, $result_db.end_time, $result_db.timestamp, $result_db.host, $result_db.ip, $result_db.comment, $quiz_db.artid, $quiz_db.secid, $quiz_db.title, $users_db.uid, $users_db.uname, $users_db.name FROM $result_db, $quiz_db, $users_db WHERE $quiz_db.artid = $result_db.quiz_id AND $result_db.uid = $users_db.uid AND $result_db.uid=$user_id "
             . $section_query . ' ORDER BY ' . $sort_key;
     } else {
         $user_name = '';
@@ -560,10 +512,9 @@ function portfolio($sort_key, $secid)
     echo "<div id='content'>";
     echo "<table border='0' cellspacing='1' cellpadding ='3' class='outer' width ='100%'>";
     echo "<form action='index.php?' method='get'><tr>";
-    echo "<td align='left' valign='top'><b><a href=index.php>" . _MD_RETURN2INDEX . '</a> -> ' . _MD_LT_PORTFOLIO
-         . '</td>';
-    echo "<td align='right' valign='center'>" . _MD_SECNAMEC . "<input type='hidden' name='op' value='portfolio'>"
-        . "<input type='hidden' name='sort_key' value='timestamp'>" . "<select name='secid'>";
+    echo "<td align='left' valign='top'><b><a href=index.php>" . _MD_RETURN2INDEX . '</a> -> ' . _MD_LT_PORTFOLIO . '</td>';
+    echo "<td align='right' valign='center'>" . _MD_SECNAMEC . "<input type='hidden' name='op' value='portfolio'>" . "<input type='hidden' name='sort_key' value='timestamp'>"
+         . "<select name='secid'>";
 
     if ($secid == 0) {
         echo "<option value='0' selected>" . _MD_ALL . '</option>';
@@ -571,9 +522,7 @@ function portfolio($sort_key, $secid)
         echo "<option value='0'>" . _MD_ALL . '</option>';
     }
     include __DIR__ . '/module_prefix.php';
-    $courses = $xoopsDB->query(
-        'SELECT secid, secname FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . ' ORDER BY secname'
-    );
+    $courses = $xoopsDB->query('SELECT secid, secname FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . ' ORDER BY secname');
     while (list($secid2list, $secname) = $xoopsDB->fetchRow($courses)) {
         $secname = $myts->displayTarea($secname);
         if ($secid2list == $secid) {
@@ -597,10 +546,7 @@ function portfolio($sort_key, $secid)
         echo "<th colspan=2 align='center'>" . _MD_LT_ACTION . '</th>';
     }
     echo '</tr>';
-    while (
-    list($res_id, $quiz_id, $uid, $score, $start_time, $end_time, $timestamp, $host, $ip, $comment, $artid, $secid,
-        $title, $uid2, $uname, $name)
-        = $xoopsDB->fetchRow($result)) {
+    while (list($res_id, $quiz_id, $uid, $score, $start_time, $end_time, $timestamp, $host, $ip, $comment, $artid, $secid, $title, $uid2, $uname, $name) = $xoopsDB->fetchRow($result)) {
         echo '<tr>';
         if ($isModAdmin) {
             echo "<td class='even'>" . $uname;
@@ -613,29 +559,25 @@ function portfolio($sort_key, $secid)
         echo "<td class='even' align='center'>$score</td>";
         echo "<td class='even' align='center'>$timestamp</td>";
         if ($isModAdmin) {
-            echo "<td class='odd' align='center'><a href='admin/index.php?op=resultdelete&amp;res_id=$res_id'>"
-                . _MD_DELETE . '</a></td>';
+            echo "<td class='odd' align='center'><a href='admin/index.php?op=resultdelete&amp;res_id=$res_id'>" . _MD_DELETE . '</a></td>';
         }
         echo '</tr>';
     }
     echo '</table>';
 
     echo "<table border='0' cellspacing='1' cellpadding ='3' width ='100%'><tr>";
-    echo "<td align='right'><a href='" . _MD_CREDITSITE . "' target='_credit'/ > Version " . round(
-            $xoopsModule->getVar('version') / 100,
-            2
-        ) . '</a></td>';
+    echo "<td align='right'><a href='" . _MD_CREDITSITE . "' target='_credit'/ > Version " . round($xoopsModule->getVar('version') / 100, 2) . '</a></td>';
     echo '</tr></table>';
     echo '</div>';
     echo '</div>';
     include dirname(dirname(__DIR__)) . '/footer.php';
 }
 
-$op = XoopsRequest::getString('op', '', 'GET');
-$secid = XoopsRequest::getInt('secid', 0, 'GET');
-$page = XoopsRequest::getInt('page', 0, 'GET');
-$artid = XoopsRequest::getInt('artid', 0, 'GET');
-$uid = XoopsRequest::getInt('uid', 0, 'GET');
+$op       = XoopsRequest::getString('op', '', 'GET');
+$secid    = XoopsRequest::getInt('secid', 0, 'GET');
+$page     = XoopsRequest::getInt('page', 0, 'GET');
+$artid    = XoopsRequest::getInt('artid', 0, 'GET');
+$uid      = XoopsRequest::getInt('uid', 0, 'GET');
 $sort_key = XoopsRequest::getString('sort_key', 'uname', 'GET');
 
 switch ($op) {

@@ -58,24 +58,20 @@ setcookie('xoopsHP_file_id', '', time() - 3600);
 // - non pair Open-Close Table.. More Header Written BUG.
 // OpenTable();
 
-$myts = MyTextSanitizer::getInstance();
-$uid = $xoopsUser ? $xoopsUser->getVar('uid') : 0;
+$myts       = MyTextSanitizer::getInstance();
+$uid        = $xoopsUser ? $xoopsUser->getVar('uid') : 0;
 $user_email = $xoopsUser ? $xoopsUser->getVar('email') : '';
-$uname = $xoopsUser ? $xoopsUser->getVar('uname') : '';
-$username = $xoopsUser ? $xoopsUser->getVar('name') : '';
+$uname      = $xoopsUser ? $xoopsUser->getVar('uname') : '';
+$username   = $xoopsUser ? $xoopsUser->getVar('name') : '';
 
 // Get the instructor's email addy etc
 $teacher_email = '';
-include 'module_prefix.php';
-$result = $xoopsDB->query(
-    'SELECT secid, title, results_to FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$quiz_id"
-);
+include __DIR__ . '/module_prefix.php';
+$result = $xoopsDB->query('SELECT secid, title, results_to FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$quiz_id");
 list($secid, $quiz_title, $teacher_email) = $xoopsDB->fetchRow($result);
 $secid = (int)$secid;
-include 'module_prefix.php';
-$result = $xoopsDB->query(
-    'SELECT secname FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . " WHERE secid=$secid"
-);
+include __DIR__ . '/module_prefix.php';
+$result = $xoopsDB->query('SELECT secname FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . " WHERE secid=$secid");
 list($secname) = $xoopsDB->fetchRow($result);
 
 // Get the form data
@@ -99,13 +95,12 @@ $end_time = $myts->stripSlashesGPC($_POST['End_Time']);
 $end_time = date('Y/m/d H:i:s', strtotime($end_time));
 
 $timestamp = date('Y/m/d H:i:s');
-$comment = '';
+$comment   = '';
 
 // Write in the db
 if ($xoopsUser) {
-    include 'module_prefix.php';
-    $query = 'INSERT INTO ' . $xoopsDB->prefix($module_prefix . '_results')
-             . " (quiz_id, uid, score, start_time, end_time, timestamp, host, ip, comment) VALUES ('";
+    include __DIR__ . '/module_prefix.php';
+    $query = 'INSERT INTO ' . $xoopsDB->prefix($module_prefix . '_results') . " (quiz_id, uid, score, start_time, end_time, timestamp, host, ip, comment) VALUES ('";
     $query .= $quiz_id . "','";
     $query .= $uid . "','";
     $query .= $score . "','";
@@ -118,10 +113,8 @@ if ($xoopsUser) {
     $result = $xoopsDB->query($query);
     // Count up the counter for the completion
     $quiz_id = (int)$quiz_id;
-    include 'module_prefix.php';
-    $xoopsDB->query(
-        'UPDATE ' . $xoopsDB->prefix($module_prefix . '_quiz') . " SET counter=counter+1 WHERE artid=$quiz_id"
-    );
+    include __DIR__ . '/module_prefix.php';
+    $xoopsDB->query('UPDATE ' . $xoopsDB->prefix($module_prefix . '_quiz') . " SET counter=counter+1 WHERE artid=$quiz_id");
 }
 
 // E-MAIL SEND
@@ -132,8 +125,7 @@ if ($xoopsModuleConfig['mail_teacher'] || $xoopsModuleConfig['mail_user']) {
     // original
     // $subject = "XoopsHP Feedback: $uname, $quiz_title";
     // $subject = mb_encode_mimeheader(mb_convert_kana($subject,"KV"),"ISO-2022-JP","B");
-    $subject = htmlspecialchars($xoopsConfig['sitename']) . ' ' . $xoopsModule->getVar('name') . ':' . $quiz_title . ' '
-        . $uname;
+    $subject = htmlspecialchars($xoopsConfig['sitename']) . ' ' . $xoopsModule->getVar('name') . ':' . $quiz_title . ' ' . $uname;
     if (!empty($username)) {
         $subject .= '(' . $username . ')';
     }
@@ -149,15 +141,15 @@ if ($xoopsModuleConfig['mail_teacher'] || $xoopsModuleConfig['mail_user']) {
     } else {
         $msg .= "\n";
     }
-// ks	$msg .= _XD_FB_UNAME . "\t$uname\n";
-// ks	$msg .= _MD_SECNAMEC . "\t$secname\n";
+    // ks	$msg .= _XD_FB_UNAME . "\t$uname\n";
+    // ks	$msg .= _MD_SECNAMEC . "\t$secname\n";
     $msg .= _MD_LT_COURSE . "\t$secname\n";
     $msg .= _XD_FB_QTITLE . "\t$quiz_title\n";
     $msg .= _XD_FB_SCORE . "\t$score\n";
     $msg .= _XD_FB_START . "\t$start_time\n";
     $msg .= _XD_FB_END . "\t$end_time\n";
     $msg .= _XD_FB_TIMESTAMP . "\t$timestamp\n";
-//	$msg .= _XD_FB_CMT . "\t$comment";
+    //	$msg .= _XD_FB_CMT . "\t$comment";
     $msg = multibyte($msg); // clean up for multybyte lang esp JP
 
     $xoopsMailer =& getMailer();
@@ -211,11 +203,9 @@ $msg .= "<TR><TD class='even'>" . _XD_FB_END . "</TD><TD class='even'>$end_time<
 $msg .= "<TR><TD class='even'>" . _XD_FB_TIMESTAMP . "</TD><TD class='even'>$timestamp</TD></TR>\n";
 //	$msg .= "<TR><TD class='even'>" . _XD_FB_CMT . "</TD><TD class='even'>$comment</TD></TR>\n";
 $msg .= "</TABLE>\n";
-$msg .= "<br />\n";
+$msg .= "<br>\n";
 $msg .= "<center>\n";
-$msg
-    .=
-    "<INPUT type='button' name='close' value='" . _XD_FB_CLSBTN . "' onClick='window.opener.close();window.close()'>\n";
+$msg .= "<INPUT type='button' name='close' value='" . _XD_FB_CLSBTN . "' onClick='window.opener.close();window.close()'>\n";
 $msg .= "</center>\n";
 
 // TEST-TEST-TEST-TEST
@@ -296,7 +286,7 @@ function my_wrapper($msg)
         //echo '<style type="text/css" media="all"><!-- @import url('.$themecss.'); --></style>';
     }
     echo '</head><body>';
-    echo '<br />'; // kazuo sudow <BR> code app
+    echo '<br>'; // kazuo sudow <BR> code app
     echo $msg;
     echo '</body></html>';
 }

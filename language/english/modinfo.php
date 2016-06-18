@@ -31,7 +31,8 @@ define('_MI_XHP_NAME', 'XoopsHP');
 define('_MI_XHP_DESC', "Manages quizzes created by <a href='http://web.uvic.ca/hrd/hotpot/' target='_new'>HotPotatoes</a>.");
 define('_MI_XHP_ADMENU', 'Manage Quizzes');
 define('_MI_XHP_LICENSE', 'Hot Potatoes License');
-define('_MI_XHP_LICENSE_DESC', "Do you have a valid Hot Potatoes license?<br /><br />To use <a href='http://web.uvic.ca/hrd/hotpot/' target='_new'>Hot Potatoes</a> for free, you need to meet the requirements.  Please read <a href='http://www.halfbakedsoftware.com/hot_pot_licence_terms.php' target='_new'>Terms of Use for Hot Potatoes</a> for details.<br /><br /><b>Without the license, you must grant module access permission for anonymous users group so that all the quiz files are available to guest visitors to this site.</b>");
+define('_MI_XHP_LICENSE_DESC',
+       "Do you have a valid Hot Potatoes license?<br><br>To use <a href='http://web.uvic.ca/hrd/hotpot/' target='_new'>Hot Potatoes</a> for free, you need to meet the requirements.  Please read <a href='http://www.halfbakedsoftware.com/hot_pot_licence_terms.php' target='_new'>Terms of Use for Hot Potatoes</a> for details.<br><br><b>Without the license, you must grant module access permission for anonymous users group so that all the quiz files are available to guest visitors to this site.</b>");
 define('_MI_XHP_WELCOME_T', 'Title of the main page');
 define('_MI_XHP_WELCOME', 'Welcome to the HotPotatoes quiz farm at %s');
 define('_MI_XHP_DESC_T', 'Description in the main page');

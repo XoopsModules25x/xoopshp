@@ -27,10 +27,9 @@
 //  ------------------------------------------------------------------------ //
 
 include_once __DIR__ . '/admin_header.php';
-//include '../../../include/cp_header.php';
 
-$moduleDirName = basename(dirname(__DIR__));
-xoops_loadLanguage('main', $moduleDirName);
+$mydirname = basename(dirname(__DIR__));
+xoops_loadLanguage('main', $mydirname);
 
 /*********************************************************/
 /* Sections Manager Functions                            */
@@ -57,10 +56,7 @@ function sections($secid2show = 0)
     <?php
     echo '<h4>' . _AM_SECCONF . '</h4>';
     include dirname(__DIR__) . '/module_prefix.php';
-    $result = $xoopsDB->query(
-        'SELECT secid, secname, secdesc, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections')
-        . ' ORDER BY secname'
-    );
+    $result = $xoopsDB->query('SELECT secid, secname, secdesc, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . ' ORDER BY secname');
     if ($xoopsDB->getRowsNum($result) > 0) {
         $myts = MyTextSanitizer::getInstance();
         echo '<hr /><h4>' . _MD_CURACTIVESEC . _MD_CLICK2EDIT . '</h4>';
@@ -92,14 +88,12 @@ function sections($secid2show = 0)
                 if ($expire > $currenttime) {
                     echo "<td class='even'>" . $expire . '</td>';
                 } else {
-                    echo "<td class='even'>" . $expire . "<span style='color:#ff0000;'>(" . _MD_LT_EXPIRED
-                         . ')</span></td>';
+                    echo "<td class='even'>" . $expire . "<span style='color:#ff0000;'>(" . _MD_LT_EXPIRED . ')</span></td>';
                 }
             } else {
                 echo "<td class='even'>" . '-------------------' . '</td>';
             }
-            echo
-                "<td class='even'><a href='main.php?op=sectionedit&amp;secid=" . $secid . "'>" . _MD_EDIT . '</a></td>';
+            echo "<td class='even'><a href='main.php?op=sectionedit&amp;secid=" . $secid . "'>" . _MD_EDIT . '</a></td>';
             echo '</tr>';
         }
         echo '</table>';
@@ -114,10 +108,7 @@ function sections($secid2show = 0)
         echo '<b>' . _MD_TITLEC . '</b>';
         echo "<input class=textbox type='text' name='title' size=40 value=''><br><br>";
         include dirname(__DIR__) . '/module_prefix.php';
-        $result = $xoopsDB->query(
-            'SELECT secid, secname, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections')
-            . '  ORDER BY secname'
-        );
+        $result = $xoopsDB->query('SELECT secid, secname, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . '  ORDER BY secname');
         echo '<b>' . _MD_SECNAMEC . "</b> <select name='secid'><option value='0' selected></option>";
         while (list($secid, $secname, $display, $expire) = $xoopsDB->fetchRow($result)) {
             $secid   = (int)$secid;
@@ -150,15 +141,11 @@ function sections($secid2show = 0)
         echo '<hr><h4>' . _MD_LAST20ART . '</h4>';
         echo "<form action='main.php' method='post'>";
         echo '<b>' . _MD_SECNAMEC . '</b>';
-        $onchangestr = "onchange=\"location='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname()
-            . "/admin/main.php?op=sections&secid='+this.options[this.selectedIndex].value\"";
+        $onchangestr = "onchange=\"location='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/admin/main.php?op=sections&secid='+this.options[this.selectedIndex].value\"";
         echo "<select name='secid'" . $onchangestr . '>';
 
         include dirname(__DIR__) . '/module_prefix.php';
-        $result = $xoopsDB->query(
-            'SELECT secid, secname, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections')
-            . '  ORDER BY secname'
-        );
+        $result = $xoopsDB->query('SELECT secid, secname, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . '  ORDER BY secname');
         while (list($secid, $secname, $display, $expire) = $xoopsDB->fetchRow($result)) {
             $secid   = (int)$secid;
             $secname = $myts->displayTarea($secname);
@@ -195,10 +182,7 @@ function sections($secid2show = 0)
         $currenttime = formatTimestamp(time(), 'Y-m-d H:i:s');
         include dirname(__DIR__) . '/module_prefix.php';
         $qiz    = $xoopsDB->prefix($module_prefix . '_quiz');
-        $result = $xoopsDB->query(
-            "SELECT artid, secid, title, posted, display, expire FROM $qiz WHERE secid=" . (int)$secid2show
-            . ' ORDER BY title'
-        );
+        $result = $xoopsDB->query("SELECT artid, secid, title, posted, display, expire FROM $qiz WHERE secid=" . (int)$secid2show . ' ORDER BY title');
         while (list($artid, $secid, $title, $posted, $display, $expire) = $xoopsDB->fetchRow($result)) {
             $artid   = (int)$artid;
             $title   = $myts->displayTarea($title);
@@ -206,22 +190,19 @@ function sections($secid2show = 0)
             $display = (int)$display;
             $expire  = $myts->displayTarea($expire);
             $checked = $display ? 'checked' : '';
-            echo '<tr>' . "<input type='hidden' name='id[$artid]' value='$artid' />"
-                 //."<td class='even'><input type='checkbox' name='selected' value='$artid' /></td>"
-                 . "<td class='even'><b>$title</b></td>" . "<td class='even'>$posted</td>" . "<td class='even'><input type='checkbox' name='display[$artid]' "
-                 . $checked . ' /></td>';
+            echo '<tr>' . "<input type='hidden' name='id[$artid]' value='$artid' />" //."<td class='even'><input type='checkbox' name='selected' value='$artid' /></td>"
+                 . "<td class='even'><b>$title</b></td>" . "<td class='even'>$posted</td>" . "<td class='even'><input type='checkbox' name='display[$artid]' " . $checked . ' /></td>';
             if ($expire !== '0000-00-00 00:00:00') {
                 if ($expire > $currenttime) {
                     echo "<td class='even'>" . $expire . '</td>';
                 } else {
-                    echo "<td class='even'>" . $expire . "<span style='color:#ff0000;'>(" . _MD_LT_EXPIRED
-                         . ')</span></td>';
+                    echo "<td class='even'>" . $expire . "<span style='color:#ff0000;'>(" . _MD_LT_EXPIRED . ')</span></td>';
                 }
             } else {
                 echo "<td class='even'>" . '-------------------' . '</td>';
             }
-            echo "<td class='even'><a href=main.php?op=secartedit&amp;artid=$artid>" . _MD_EDIT . '</a></td>' . "<td class='even'><a href=main.php?op=secartdelete&amp;artid=$artid>"
-                . _MD_DELETE . '</a></td>' . '</tr>';
+            echo "<td class='even'><a href=main.php?op=secartedit&amp;artid=$artid>" . _MD_EDIT . '</a></td>' . "<td class='even'><a href=main.php?op=secartdelete&amp;artid=$artid>" . _MD_DELETE
+                 . '</a></td>' . '</tr>';
         }
         echo '</table><br>';
         echo "<input type='hidden' name='op' value='articledispchange' />";
@@ -229,13 +210,13 @@ function sections($secid2show = 0)
         echo '</form>';
     }
 
-    echo '<br />';
+    echo '<br>';
     echo '<hr /><h4>' . _MD_ADDNEWSEC . '</h4>';
     echo "<form action='main.php' method='post'>";
-    echo '<b>' . _MD_SECNAMEC . '</b>  ' . _MD_MAXCHAR . '<br />';
-    echo "<input class='textbox' type='text' name='secname' size='40' maxlength='40' /><br /><br />";
-    echo '<b>' . _MD_SECDESC . '</b>  ' . _MD_EXDESC . '<br />';
-    echo "<input class='textbox' type='text' name='secdesc' size='40' maxlength='255' /><br /><br />";
+    echo '<b>' . _MD_SECNAMEC . '</b>  ' . _MD_MAXCHAR . '<br>';
+    echo "<input class='textbox' type='text' name='secname' size='40' maxlength='40' /><br><br>";
+    echo '<b>' . _MD_SECDESC . '</b>  ' . _MD_EXDESC . '<br>';
+    echo "<input class='textbox' type='text' name='secdesc' size='40' maxlength='255' /><br><br>";
     echo '<b>' . _MD_LT_DISPLAY . '</b>';
     echo "<input class='textbox' type='checkbox' name='display' value='1' checked /><br><br>";
     $currenttime = formatTimestamp(time(), 'Y-m-d H:i:s');
@@ -260,9 +241,7 @@ function secartedit($artid)
     echo '<h4>' . _AM_SECCONF . '</h4>';
     $artid = (int)$artid;
     include dirname(__DIR__) . '/module_prefix.php';
-    $result = $xoopsDB->query(
-        'SELECT artid, secid, title, content, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$artid"
-    );
+    $result = $xoopsDB->query('SELECT artid, secid, title, content, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$artid");
     list($artid, $secid, $title, $content, $display, $expire) = $xoopsDB->fetchRow($result);
     $artid   = (int)$artid;
     $secid   = (int)$secid;
@@ -273,15 +252,11 @@ function secartedit($artid)
     $expire  = $myts->displayTarea($expire);
     echo '<hr /><h3>' . _MD_EDITARTICLE . '</h3>';
     echo "<form enctype='multipart/form-data' action='main.php' method='post'>";
-    echo '<b>' . _MD_EDITARTID . '&nbsp;&nbsp;' . $artid . '</b><br /><br />';
-    echo '<b>' . _MD_TITLEC . "</b><input class='textbox' type='text' name='title' size='40' value='" . $title
-         . "' /><br /><br />";
+    echo '<b>' . _MD_EDITARTID . '&nbsp;&nbsp;' . $artid . '</b><br><br>';
+    echo '<b>' . _MD_TITLEC . "</b><input class='textbox' type='text' name='title' size='40' value='" . $title . "' /><br><br>";
     echo '<b>' . _MD_SECNAMEC . "</b> <select name='secid'>";
     include dirname(__DIR__) . '/module_prefix.php';
-    $result2 = $xoopsDB->query(
-        'SELECT secid, secname, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections')
-        . '  ORDER BY secname'
-    );
+    $result2 = $xoopsDB->query('SELECT secid, secname, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . '  ORDER BY secname');
     while (list($secid2, $secname, $display2, $expire2) = $xoopsDB->fetchRow($result2)) {
         $secid2   = (int)$secid2;
         $secname  = $myts->displayTarea($secname);
@@ -299,10 +274,10 @@ function secartedit($artid)
         echo '</option>';
     }
     echo '</select>';
-    echo '<br /><br />';
+    echo '<br><br>';
     echo '<b>' . _MD_LT_DISPLAY . '</b>';
     $checked = $display ? 'checked' : '';
-    echo "<input type='checkbox' name='display' " . $checked . ' /><br /><br />';
+    echo "<input type='checkbox' name='display' " . $checked . ' /><br><br>';
     $currenttime = formatTimestamp(time(), 'Y-m-d H:i:s');
     $endtime     = formatTimestamp(time() + $xoopsModuleConfig['default_days'] * 86400, 'Y-m-d H:i:s');
     if ($expire !== '0000-00-00 00:00:00') {
@@ -351,13 +326,11 @@ function sectionedit($secid)
 {
     global $xoopsDB, $xoopsConfig, $xoopsModule, $xoopsModuleConfig;
     xoops_cp_header();
-    echo '<h4>' . _AM_SECCONF . '</h4><br />';
+    echo '<h4>' . _AM_SECCONF . '</h4><br>';
     $myts  = MyTextSanitizer::getInstance();
     $secid = (int)$secid;
     include dirname(__DIR__) . '/module_prefix.php';
-    $result = $xoopsDB->query(
-        'SELECT secid, secname, secdesc, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . " WHERE secid=$secid"
-    );
+    $result = $xoopsDB->query('SELECT secid, secname, secdesc, display, expire FROM ' . $xoopsDB->prefix($module_prefix . '_sections') . " WHERE secid=$secid");
     list($secid, $secname, $secdesc, $display, $expire) = $xoopsDB->fetchRow($result);
     $secname = $myts->stripSlashesGPC($secname);
     $secdesc = $myts->stripSlashesGPC($secdesc);
@@ -365,31 +338,25 @@ function sectionedit($secid)
     $expire  = $myts->stripSlashesGPC($expire);
     $expire  = $myts->displayTarea($expire);
     include dirname(__DIR__) . '/module_prefix.php';
-    $result2 = $xoopsDB->query(
-        'select artid from ' . $xoopsDB->prefix($module_prefix . '_quiz') . " where secid=$secid"
-    );
+    $result2 = $xoopsDB->query('select artid from ' . $xoopsDB->prefix($module_prefix . '_quiz') . " where secid=$secid");
     $number  = $xoopsDB->getRowsNum($result2);
 
     echo '<h4>';
     printf(_MD_EDITTHISSEC, $myts->displayTarea($secname));
     echo '</h4>';
-    echo '<br />';
+    echo '<br>';
     printf(_MD_THISSECHAS, $number);
 
-    echo '<br /><br />';
-    echo "<form action='main.php' method='post'><br />";
-    echo '<b>' . _MD_SECNAMEC . '</b> ' . _MD_MAXCHAR . '<br />';
-    echo "<input class='textbox' type='text' name='secname' size='40' maxlength='40' value='" . $myts->displayTarea(
-            $secname
-        ) . "' /><br /><br />";
-    echo '<b>' . _MD_SECDESC . '</b> ' . _MD_EXDESC . '<br />';
-    echo "<input class='textbox' type='text' name='secdesc' size='40' maxlength='50' value='" . $myts->displayTarea(
-            $secdesc
-        ) . "' /><br /><br />";
+    echo '<br><br>';
+    echo "<form action='main.php' method='post'><br>";
+    echo '<b>' . _MD_SECNAMEC . '</b> ' . _MD_MAXCHAR . '<br>';
+    echo "<input class='textbox' type='text' name='secname' size='40' maxlength='40' value='" . $myts->displayTarea($secname) . "' /><br><br>";
+    echo '<b>' . _MD_SECDESC . '</b> ' . _MD_EXDESC . '<br>';
+    echo "<input class='textbox' type='text' name='secdesc' size='40' maxlength='50' value='" . $myts->displayTarea($secdesc) . "' /><br><br>";
     echo "<input type='hidden' name='secid' value='" . $secid . "' />";
     echo '<b>' . _MD_LT_DISPLAY . '</b>';
     $checked = $display ? 'checked' : '';
-    echo "<input type='checkbox' name='display' value='1' " . $checked . ' /><br /><br />';
+    echo "<input type='checkbox' name='display' value='1' " . $checked . ' /><br><br>';
     $currenttime = formatTimestamp(time(), 'Y-m-d H:i:s');
     $endtime     = formatTimestamp(time() + $xoopsModuleConfig['default_days'] * 86400, 'Y-m-d H:i:s');
     if ($expire !== '0000-00-00 00:00:00') {
@@ -433,11 +400,7 @@ function cgi_replace($content)
 {
     global $xoopsDB, $xoopsModule;
     if (!strpos(_XD_FB_CODE4RESULTS_MARKER, $content)) {
-        $content = str_replace(
-            _XD_FB_CODE4RESULTS_INSERT,
-            _XD_FB_CODE4RESULTS . "\n\n" . _XD_FB_CODE4RESULTS_INSERT,
-            $content
-        );
+        $content = str_replace(_XD_FB_CODE4RESULTS_INSERT, _XD_FB_CODE4RESULTS . "\n\n" . _XD_FB_CODE4RESULTS_INSERT, $content);
         if (!strpos(_XD_FB_CODE4STARTUP, $content)) {
             $content = str_replace(_XD_FB_CODE4STARTUP_INSERT, "\\0\n\n" . _XD_FB_CODE4STARTUP . "\n", $content);
         } else {
@@ -453,11 +416,8 @@ function cgi_replace($content)
     $content = str_replace('toLocaleString', 'toGMTString', $content);
     $action  = XOOPS_URL . '/modules/' . $xoopsModule->dirname() . '/process_form.php';
 
-    return preg_replace(
-        "/var ResultForm = '<html><body><form name=\"Results\" action=\"[^\"]*\"/",
-        "var ResultForm = '<html><body><form name=\"Results\" action=\"$action\" accept-charset=\"EUC-JP\"",
-        $content
-    );
+    return preg_replace("/var ResultForm = '<html><body><form name=\"Results\" action=\"[^\"]*\"/", "var ResultForm = '<html><body><form name=\"Results\" action=\"$action\" accept-charset=\"EUC-JP\"",
+                        $content);
 }
 
 // URL GET_VARS OPTION
@@ -496,16 +456,14 @@ switch ($op) {
         $display   = (int)(empty($_POST['display']) ? 0 : 1);
         $setexpire = (int)(empty($_POST['setexpire']) ? 0 : 1);
         $expire    = $setexpire ? $myts->stripSlashesGPC($_POST['expire']) : 0;
-        $expire    = $expire != 0 ? $xoopsDB->quoteString($expire):0;
+        $expire    = $expire != 0 ? $xoopsDB->quoteString($expire) : 0;
         $secname   = $xoopsDB->quoteString($secname);
         $secdesc   = $xoopsDB->quoteString($secdesc);
         include dirname(__DIR__) . '/module_prefix.php';
         $newid = $xoopsDB->genId($xoopsDB->prefix($module_prefix . '_sections') . '_secid_seq');
         include dirname(__DIR__) . '/module_prefix.php';
         $mytable = $xoopsDB->prefix($module_prefix . '_sections');
-        $result  = $xoopsDB->query(
-            'INSERT INTO ' . $mytable . " (secid, secname, secdesc, display, expire) VALUES ($newid, $secname, $secdesc, $display, $expire)"
-        );
+        $result  = $xoopsDB->query('INSERT INTO ' . $mytable . " (secid, secname, secdesc, display, expire) VALUES ($newid, $secname, $secdesc, $display, $expire)");
         if ($result) {
             redirect_header('main.php?op=sections', 2, _MD_DBUPDATED);
             break;
@@ -527,16 +485,10 @@ switch ($op) {
         }
         $artid = (int)$artid;
         include dirname(__DIR__) . '/module_prefix.php';
-        $result = $xoopsDB->query(
-            'SELECT title FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$artid"
-        );
+        $result = $xoopsDB->query('SELECT title FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$artid");
         list($title) = $xoopsDB->fetchRow($result);
         $title = $myts->displayTarea($title);
-        xoops_confirm(
-            array('op' => 'secartdelete_ok', 'artid' => $artid),
-            'main.php',
-            sprintf(_MD_DELETETHISART, $title) . '<br /><br />' . _MD_RUSUREDELART
-        );
+        xoops_confirm(array('op' => 'secartdelete_ok', 'artid' => $artid), 'main.php', sprintf(_MD_DELETETHISART, $title) . '<br><br>' . _MD_RUSUREDELART);
         break;
 
     case 'secartdelete_ok':
@@ -570,9 +522,7 @@ switch ($op) {
         $expire    = $xoopsDB->quoteString($expire);
         include dirname(__DIR__) . '/module_prefix.php';
         $secid = (int)$secid;
-        $xoopsDB->query(
-            'UPDATE ' . $xoopsDB->prefix($module_prefix . '_sections') . " SET secname=$secname, secdesc=$secdesc, display=$display, expire=$expire WHERE secid=$secid"
-        );
+        $xoopsDB->query('UPDATE ' . $xoopsDB->prefix($module_prefix . '_sections') . " SET secname=$secname, secdesc=$secdesc, display=$display, expire=$expire WHERE secid=$secid");
         redirect_header('main.php?op=sections', 2, _MD_DBUPDATED);
         break;
 
@@ -581,9 +531,7 @@ switch ($op) {
             $secid   = (int)$secid;
             $display = (int)(empty($_POST['display'][$secid]) ? 0 : 1);
             include dirname(__DIR__) . '/module_prefix.php';
-            $xoopsDB->query(
-                'UPDATE ' . $xoopsDB->prefix($module_prefix . '_sections') . " set display=$display WHERE secid=$secid"
-            );
+            $xoopsDB->query('UPDATE ' . $xoopsDB->prefix($module_prefix . '_sections') . " set display=$display WHERE secid=$secid");
         }
         redirect_header('main.php?op=sections', 2, _MD_DBUPDATED);
         break;
@@ -593,9 +541,7 @@ switch ($op) {
             $artid   = (int)$artid;
             $display = (int)(empty($_POST['display'][$artid]) ? 0 : 1);
             include dirname(__DIR__) . '/module_prefix.php';
-            $xoopsDB->query(
-                'UPDATE ' . $xoopsDB->prefix($module_prefix . '_quiz') . " set display=$display WHERE artid=$artid"
-            );
+            $xoopsDB->query('UPDATE ' . $xoopsDB->prefix($module_prefix . '_quiz') . " set display=$display WHERE artid=$artid");
         }
         redirect_header('main.php?op=sections', 2, _MD_DBUPDATED);
         break;
@@ -611,8 +557,7 @@ switch ($op) {
             $title = $myts->stripSlashesGPC($_POST['title']);
         }
         $title   = $xoopsDB->quoteString($title);
-        $content = is_uploaded_file($_FILES['quizfile']['tmp_name']) ? implode(file($_FILES['quizfile']['tmp_name']))
-            : '';
+        $content = is_uploaded_file($_FILES['quizfile']['tmp_name']) ? implode(file($_FILES['quizfile']['tmp_name'])) : '';
         if (empty($content)) {
             redirect_header('main.php?op=sections', 2, _MD_ERRORARTCONT);
         }
@@ -629,9 +574,8 @@ switch ($op) {
         include dirname(__DIR__) . '/module_prefix.php';
         $newid = $xoopsDB->genId($xoopsDB->prefix($module_prefix . '_quiz') . '_artid_seq');
         include dirname(__DIR__) . '/module_prefix.php';
-        $result = $xoopsDB->query(
-            'INSERT INTO ' . $xoopsDB->prefix($module_prefix . '_quiz') . " (artid, secid, title, content, posted, poster, results_to, counter, display, expire) VALUES ($newid, $secid, $title, $content, $posted, $poster, $results_to, 0, $display, $expire)"
-        );
+        $result = $xoopsDB->query('INSERT INTO ' . $xoopsDB->prefix($module_prefix . '_quiz')
+                                  . " (artid, secid, title, content, posted, poster, results_to, counter, display, expire) VALUES ($newid, $secid, $title, $content, $posted, $poster, $results_to, 0, $display, $expire)");
         if ($result) {
             redirect_header('main.php?op=sections', 2, _MD_DBUPDATED);
             break;
@@ -661,8 +605,7 @@ switch ($op) {
         $myts      = MyTextSanitizer::getInstance();
         $secid     = (int)$_POST['secid'];
         $title     = !empty($_POST['title']) ? $myts->stripSlashesGPC($_POST['title']) : '';
-        $content   = is_uploaded_file($_FILES['quizfile']['tmp_name']) ? implode(file($_FILES['quizfile']['tmp_name']))
-            : '';
+        $content   = is_uploaded_file($_FILES['quizfile']['tmp_name']) ? implode(file($_FILES['quizfile']['tmp_name'])) : '';
         $display   = (int)(empty($_POST['display']) ? 0 : 1);
         $setexpire = (int)(empty($_POST['setexpire']) ? 0 : 1);
         $expire    = $setexpire ? $myts->stripSlashesGPC($_POST['expire']) : '';
@@ -670,16 +613,12 @@ switch ($op) {
         $title     = $xoopsDB->quoteString($title);
         if (empty($content)) {
             include dirname(__DIR__) . '/module_prefix.php';
-            $xoopsDB->query(
-                'UPDATE ' . $xoopsDB->prefix($module_prefix . '_quiz') . " SET secid=$secid, title=$title, display=$display, expire=$expire WHERE artid=$artid"
-            );
+            $xoopsDB->query('UPDATE ' . $xoopsDB->prefix($module_prefix . '_quiz') . " SET secid=$secid, title=$title, display=$display, expire=$expire WHERE artid=$artid");
         } else {
             $content = cgi_replace($content);
             $content = $xoopsDB->quoteString($content);
             include dirname(__DIR__) . '/module_prefix.php';
-            $xoopsDB->query(
-                'UPDATE ' . $xoopsDB->prefix($module_prefix . '_quiz') . " SET secid=$secid, title=$title, content=$content, display=$display, expire=$expire WHERE artid=$artid"
-            );
+            $xoopsDB->query('UPDATE ' . $xoopsDB->prefix($module_prefix . '_quiz') . " SET secid=$secid, title=$title, content=$content, display=$display, expire=$expire WHERE artid=$artid");
         }
         redirect_header('main.php?op=sections', 2, _MD_DBUPDATED);
         break;
@@ -687,11 +626,7 @@ switch ($op) {
     case 'sectiondelete':
         xoops_cp_header();
         echo '<h4>' . _AM_SECCONF . '</h4>';
-        xoops_confirm(
-            array('op' => 'sectiondelete_ok', 'secid' => $secid),
-            'main.php',
-            _MD_RUSUREDELSEC . '<br />' . _MD_THISDELETESALL
-        );
+        xoops_confirm(array('op' => 'sectiondelete_ok', 'secid' => $secid), 'main.php', _MD_RUSUREDELSEC . '<br>' . _MD_THISDELETESALL);
         break;
 
     case 'sectiondelete_ok':
@@ -716,21 +651,14 @@ switch ($op) {
             $res_id = 0;
         }
         include dirname(__DIR__) . '/module_prefix.php';
-        $result = $xoopsDB->query(
-            'SELECT quiz_id, uid, score, timestamp FROM ' . $xoopsDB->prefix($module_prefix . '_results') . " WHERE id=$res_id"
-        );
+        $result = $xoopsDB->query('SELECT quiz_id, uid, score, timestamp FROM ' . $xoopsDB->prefix($module_prefix . '_results') . " WHERE id=$res_id");
         list($quiz_id, $uid, $score, $timestamp) = $xoopsDB->fetchRow($result);
         include dirname(__DIR__) . '/module_prefix.php';
-        $result = $xoopsDB->query(
-            'SELECT title FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$quiz_id"
-        );
+        $result = $xoopsDB->query('SELECT title FROM ' . $xoopsDB->prefix($module_prefix . '_quiz') . " WHERE artid=$quiz_id");
         list($title) = $xoopsDB->fetchRow($result);
-        $message = '<center><br />' . _MD_RUSUREDELREC . '<br /><br />';
-        $message .= "<table border='1'><th>" . _MD_LT_STUDENT . '</th><th>' . _MD_LT_TITLE . '</th><th>' . _MD_LT_SCORE
-                    . '</th><th>' . _MD_LT_DATE . '</th></tr>';
-        $message .= "<tr><td align='center'>" . $xoopsUser->getUnameFromId(
-                $uid
-            ) . "</td><td align='center'>$title</td><td align='center'>$score</td><td align='center'>$timestamp</td></tr>";
+        $message = '<center><br>' . _MD_RUSUREDELREC . '<br><br>';
+        $message .= "<table border='1'><th>" . _MD_LT_STUDENT . '</th><th>' . _MD_LT_TITLE . '</th><th>' . _MD_LT_SCORE . '</th><th>' . _MD_LT_DATE . '</th></tr>';
+        $message .= "<tr><td align='center'>" . $xoopsUser->getUnameFromId($uid) . "</td><td align='center'>$title</td><td align='center'>$score</td><td align='center'>$timestamp</td></tr>";
         $message .= '</table></center>';
         xoops_confirm(array('op' => 'resultdelete_ok', 'res_id' => $res_id, 'artid' => $quiz_id), 'main.php', $message);
         break;

@@ -1,4 +1,17 @@
 ---------------------------------------
+1.14 Beta 2  2016-06-17
+---------------------------------------
+- Code cosmetics (mamba)
+- reference mismatch (mamba)
+- removed @version (mamba)
+- replaced <b /> with <b> (mamba)
+- Unnecessary double quotes (mamba)
+- fix date issue when saving section (mamba)
+- XOOPS 2.5.8, PHP 7 adjustments (mamba)
+- addNavigation(basename(__FILE__)) (mamba)
+
+
+---------------------------------------
 1.14 Beta 1  2013-08-14
 ---------------------------------------
 - Converted to XOOPS 2.5.6 Admin GUI (Mamba)
